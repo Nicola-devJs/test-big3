@@ -32,6 +32,7 @@ export const MainPagination = styled(StyledFlex)(
    width: 100%;
    height: 40px;
    margin-top: 32px;
+   justify-content: space-between;
 `
 )
 

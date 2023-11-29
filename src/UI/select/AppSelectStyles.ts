@@ -1,6 +1,10 @@
 import { CSSObjectWithLabel, ControlProps, StylesConfig } from 'react-select'
 
-export const stylesSelect = (): StylesConfig => ({
+interface stylesSelectProps {
+   width: string
+}
+
+export const stylesSelect = (props: stylesSelectProps): StylesConfig => ({
    control: (baseStyles: CSSObjectWithLabel, state: ControlProps) => ({
       ...baseStyles,
       minHeight: '40px',
@@ -10,7 +14,7 @@ export const stylesSelect = (): StylesConfig => ({
    }),
    container: (baseStyles: CSSObjectWithLabel) => ({
       ...baseStyles,
-      width: '364px',
+      width: props.width,
    }),
    multiValue: (baseStyles: CSSObjectWithLabel) => ({
       ...baseStyles,

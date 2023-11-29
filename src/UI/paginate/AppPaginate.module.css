@@ -1,0 +1,37 @@
+.paginate {
+   display: flex;
+   gap: 16px;
+   align-items: center;
+}
+
+.page,
+.previous,
+.next,
+.break {
+   width: 40px;
+   height: 40px;
+   border-radius: 4px;
+   background-color: transparent;
+}
+
+.page_link,
+.previous_link,
+.next_link,
+.break_link {
+   font-size: 14px;
+   color: #707070;
+   cursor: pointer;
+   width: inherit;
+   height: inherit;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.active_page {
+   background-color: #e4163a;
+}
+
+.active_page_link {
+   color: #fff;
+}

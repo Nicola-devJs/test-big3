@@ -9,6 +9,7 @@ import { ToolbarWrapper } from './StyledPlayers'
 import { Search } from '../../UI/search/Search'
 import AppSelect from '../../UI/select/AppSelect'
 import { Button } from '../../UI/button/Button'
+import { AppPagination } from '../../UI/paginate/AppPagination'
 
 export const Players = () => {
    return (
@@ -17,8 +18,10 @@ export const Players = () => {
             <ToolbarWrapper $align="center">
                <Search width="364px" />
                <AppSelect
+                  width="364px"
                   name="select-players"
                   multi
+                  isCloseMenuOnSelect={false}
                   options={[
                      { value: 'select-1', label: 'select 1' },
                      { value: 'select-2', label: 'select 2' },
@@ -34,7 +37,19 @@ export const Players = () => {
             <Button $icon="+">Add</Button>
          </MainToolbar>
          <MainContent>Players</MainContent>
-         <MainPagination>Pagination</MainPagination>
+         <MainPagination>
+            <AppPagination itemsPerPage={6} />
+            <AppSelect
+               width="88px"
+               name="items-per-page-select"
+               options={[
+                  { value: '6', label: '6' },
+                  { value: '12', label: '12' },
+                  { value: '24', label: '24' },
+               ]}
+               selectedValue={{ value: '6', label: '6' }}
+            />
+         </MainPagination>
       </Main>
    )
 }

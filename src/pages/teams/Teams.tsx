@@ -8,6 +8,8 @@ import {
 import { Button } from '../../UI/button/Button'
 import { Cards } from '../../components/cards/Cards'
 import { Search } from '../../UI/search/Search'
+import { AppPagination } from '../../UI/paginate/AppPagination'
+import AppSelect from '../../UI/select/AppSelect'
 
 export const Teams = () => {
    return (
@@ -19,7 +21,19 @@ export const Teams = () => {
          <MainContent>
             <Cards />
          </MainContent>
-         <MainPagination>Pagination</MainPagination>
+         <MainPagination>
+            <AppPagination itemsPerPage={6} />
+            <AppSelect
+               width="88px"
+               name="items-per-page-select"
+               options={[
+                  { value: '6', label: '6' },
+                  { value: '12', label: '12' },
+                  { value: '24', label: '24' },
+               ]}
+               selectedValue={{ value: '6', label: '6' }}
+            />
+         </MainPagination>
       </Main>
    )
 }
