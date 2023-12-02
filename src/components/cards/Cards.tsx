@@ -8,10 +8,14 @@ import {
 } from './StyledCards'
 import playerImg from '../../assets/images/player.png'
 
-export const Cards: React.FC = () => {
+interface CardsProps {
+   onClick: () => void
+}
+
+export const Cards: React.FC<CardsProps> = (props) => {
    return (
       <CardsWrapper>
-         <CardItem>
+         <CardItem {...props}>
             <CardBody $direction="column">
                <CardImg $justify="center" $align="flex-end">
                   <img src={playerImg} alt="card-img" />

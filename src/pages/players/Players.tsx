@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Main } from '../../components/styled/main/Main'
 import {
    MainPagination,
@@ -10,11 +11,16 @@ import { Search } from '../../UI/search/Search'
 import AppSelect from '../../UI/select/AppSelect'
 import { Button } from '../../UI/button/Button'
 import { AppPagination } from '../../UI/paginate/AppPagination'
+import { Empty } from '../../components/empty/Empty'
+import { RoutesNamePath } from '../Routes'
+import { Cards } from '../../components/cards/Cards'
 
 export const Players = () => {
+   const navigate = useNavigate()
+
    return (
       <Main>
-         <MainToolbar $justify="space-between">
+         <MainToolbar $justify="space-between" $align="center">
             <ToolbarWrapper $align="center">
                <Search width="364px" />
                <AppSelect
@@ -34,9 +40,13 @@ export const Players = () => {
                   ]}
                />
             </ToolbarWrapper>
-            <Button $icon="+">Add</Button>
+            <Button $icon="+" onClick={() => navigate(RoutesNamePath.ADDITEM)}>
+               Add
+            </Button>
          </MainToolbar>
-         <MainContent>Players</MainContent>
+         <MainContent>
+            <Cards onClick={() => navigate(`${RoutesNamePath.PLAYERS}/${2}`)} />
+         </MainContent>
          <MainPagination>
             <AppPagination itemsPerPage={6} />
             <AppSelect

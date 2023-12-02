@@ -1,23 +1,25 @@
 import React from 'react'
-import {
-   StyledHeader,
-   HeaderLogo,
-   HeaderProfile,
-   HeaderProfileAvatar,
-   HeaderProfileName,
-} from './StyledHeader'
+import { StyledHeader, HeaderLogo, HeaderMobileMenu } from './StyledHeader'
 import logo from '../../assets/images/logo.png'
-import { useAppSelector } from '../../core/redux/hooks'
+import MediaQuery from 'react-responsive'
+import { Profile } from '../profile/Profile'
 
-export const Header = () => {
-   const { user } = useAppSelector((state) => state.auth)
+interface HeaderProps {
+   toggleMenuHandel: () => void
+}
+
+export const Header: React.FC<HeaderProps> = ({ toggleMenuHandel }) => {
    return (
       <StyledHeader $justify="space-between" $align="center">
+         <MediaQuery maxWidth={768}>
+            <HeaderMobileMenu onClick={toggleMenuHandel}>
+               <span></span>
+            </HeaderMobileMenu>
+         </MediaQuery>
          <HeaderLogo src={logo} alt="logo" />
-         <HeaderProfile $align="center">
-            <HeaderProfileName>{user.name}</HeaderProfileName>
-            <HeaderProfileAvatar $avatar={user.avatarUrl} />
-         </HeaderProfile>
+         <MediaQuery minWidth={769}>
+            <Profile />
+         </MediaQuery>
       </StyledHeader>
    )
 }

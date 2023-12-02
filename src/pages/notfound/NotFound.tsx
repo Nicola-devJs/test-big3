@@ -1,22 +1,17 @@
 import React from 'react'
-import {
-   StyledNotFound,
-   NotFoundImg,
-   NotFoundTitle,
-   NotFoundText,
-} from './StyledNotFound'
+import { StyledNotFound } from './StyledNotFound'
 import notfound from '../../assets/images/404.png'
+import { ErrorContent } from '../../components/errorContent/ErrorContent'
 
 export const NotFound = () => {
    return (
       <StyledNotFound $direction="column" $justify="center" $align="center">
-         <NotFoundImg>
-            <img src={notfound} alt="404" />
-         </NotFoundImg>
-         <NotFoundTitle>Page not found</NotFoundTitle>
-         <NotFoundText>
-            Sorry, we can’t find what you’re looking for
-         </NotFoundText>
+         <ErrorContent
+            $sizeImg={{ w: 380, h: 212 }}
+            img={notfound}
+            title="Page not found"
+            text="Sorry, we can’t find what you’re looking for"
+         />
       </StyledNotFound>
    )
 }

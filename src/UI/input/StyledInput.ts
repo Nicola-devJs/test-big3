@@ -1,17 +1,6 @@
 import { styled } from 'styled-components'
-import { StyledFlex } from '../../components/styled/flex/StyledFlex'
 import openEye from '../../assets/icons/open_eye.svg'
 import closeEye from '../../assets/icons/close_eye.svg'
-
-export const InputLabel = styled(StyledFlex)((props) => ({
-   color: props.theme.colors.g.gray,
-   fontSize: 14,
-   lineHeight: '170%',
-   marginBottom: 8,
-   textTransform: 'capitalize',
-   position: 'relative',
-   width: '100%',
-}))
 
 export const InputIsViewPassword = styled.span<{ $isView: boolean }>(
    (props) => ({
@@ -53,5 +42,23 @@ export const StyledInput = styled.input<{ $isValid: boolean }>(
    }
 
    ${props.$isValid && `outline: 1px solid ${props.theme.colors.r.lighestRed};`}
+
+   &[type='number']::-webkit-outer-spin-button,
+   &[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+   }
+
+   &[type='number'],
+   &[type='number']:hover,
+   &[type='number']:focus {
+      appearance: none;
+      -moz-appearance: textfield;
+   }
+
+   
+   &[type="date"] {
+      font-family: ${props.theme.fonts.primary};
+   }
+}
 `
 )

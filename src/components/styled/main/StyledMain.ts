@@ -14,15 +14,34 @@ export const MainBody = styled(StyledFlex)(
    @media(${props.theme.media.maxTablet}) {
       padding: 24px;
    }
+
+   @media(${props.theme.media.maxPhone}) {
+      padding: 12px;
+   }
 `
 )
 
 export const MainToolbar = styled(StyledFlex)(
    (props) => `
    width: 100%;
-   height: 40px;
    margin-bottom: 32px;
    gap: 24px;
+
+   @media(${props.theme.media.maxTablet}) {
+      margin-bottom: 24px;
+   }
+
+   @media(${props.theme.media.maxPhone}) {
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 16px;
+      & > #search {
+         flex: 1 1 auto;
+      }
+      & > * {
+         width: 100% !important;
+      }
+   }
 
 `
 )

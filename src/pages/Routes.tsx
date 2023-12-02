@@ -10,10 +10,14 @@ import { useAppDispatch } from '../core/redux/hooks'
 import { authSlice } from '../modules/authorization/authorizationSlice'
 import { IAuthUserResponse } from '../api/dto/IAuthorization'
 import { NotFound } from './notfound/NotFound'
+import { AddItem } from './add/AddItem'
+import { PlayerPage } from './playerPage/PlayerPage'
+import { TeamPage } from './teamPage/TeamPage'
 
 export enum RoutesNamePath {
    MAIN = '/',
    TEAMS = '/teams',
+   ADDITEM = 'add',
    PLAYERS = '/players',
    SIGNIN = '/signin',
    SIGNUP = '/signup',
@@ -35,7 +39,23 @@ const AppRouter = () => {
       <Routes>
          <Route path={RoutesNamePath.MAIN} element={<Layout />}>
             <Route path={RoutesNamePath.TEAMS} element={<Teams />} />
+            <Route
+               path={`${RoutesNamePath.TEAMS}/${RoutesNamePath.ADDITEM}`}
+               element={<AddItem />}
+            />
             <Route path={RoutesNamePath.PLAYERS} element={<Players />} />
+            <Route
+               path={`${RoutesNamePath.PLAYERS}/${RoutesNamePath.ADDITEM}`}
+               element={<AddItem />}
+            />
+            <Route
+               path={`${RoutesNamePath.PLAYERS}/:id`}
+               element={<PlayerPage />}
+            />
+            <Route
+               path={`${RoutesNamePath.TEAMS}/:id`}
+               element={<TeamPage />}
+            />
          </Route>
          <Route path={RoutesNamePath.SIGNIN} element={<SignIn />} />
          <Route path={RoutesNamePath.SIGNUP} element={<SignUp />} />

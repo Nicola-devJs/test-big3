@@ -8,9 +8,7 @@ interface MainProps {
 export const Main: React.FC<MainProps> = ({ children }) => {
    return (
       <StyledMain as="main">
-         <MainBody $direction="column" $align="center">
-            {children}
-         </MainBody>
+         <MainBody $direction="column">{children}</MainBody>
       </StyledMain>
    )
 }

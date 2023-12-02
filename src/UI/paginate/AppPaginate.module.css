@@ -35,3 +35,23 @@
 .active_page_link {
    color: #fff;
 }
+
+@media (max-width: 768px) {
+   .paginate {
+      gap: 8px;
+   }
+   .page,
+   .previous,
+   .next,
+   .break {
+      width: 28px;
+      height: 28px;
+   }
+
+   .page_link,
+   .previous_link,
+   .next_link,
+   .break_link {
+      font-size: 15px;
+   }
+}

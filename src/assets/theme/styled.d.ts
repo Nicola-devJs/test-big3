@@ -38,7 +38,7 @@ export enum sizeBlockValues {
 export enum MediaQueryToScreen {
    maxNotebook = 'max-width: 1024px',
    maxTablet = 'max-width: 768px',
-   maxPhone = 'max-width: 375px',
+   maxPhone = 'max-width: 425px',
 }
 
 declare module 'styled-components' {

@@ -1,18 +1,38 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+import MediaQuery from 'react-responsive'
 import { Header } from '../header/Header'
 import { Sidebar } from '../sidebar/Sidebar'
-import { Outlet } from 'react-router-dom'
 import { RequiredAuth } from '../../hoc/RequiredAuth'
-import { StyledLayout, LayoutWrapperMain } from './StyledLayout'
+import {
+   StyledLayout,
+   LayoutWrapperMain,
+   OverlayToOpenMenu,
+} from './StyledLayout'
 export const Layout: React.FC = () => {
+   const [isOpenMenu, setOpenMenu] = useState(false)
+
+   const toggleMenuHandel = () => {
+      setOpenMenu((prev) => !prev)
+   }
+
    return (
       <StyledLayout $direction="column">
-         <Header />
+         <Header toggleMenuHandel={toggleMenuHandel} />
          <LayoutWrapperMain>
-            <Sidebar />
+            <Sidebar
+               $visibleMenu={isOpenMenu}
+               closeMobileMenu={toggleMenuHandel}
+            />
             <RequiredAuth>
                <Outlet />
             </RequiredAuth>
+            <MediaQuery maxWidth={768}>
+               <OverlayToOpenMenu
+                  $activeMenu={isOpenMenu}
+                  onClick={toggleMenuHandel}
+               />
+            </MediaQuery>
          </LayoutWrapperMain>
       </StyledLayout>
    )

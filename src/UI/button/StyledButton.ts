@@ -4,7 +4,7 @@ import { StyledFlex } from '../../components/styled/flex/StyledFlex'
 export interface StyledButtonProps {
    width?: string
    $icon?: string
-   secondary?: boolean
+   $secondary?: boolean
    $loading?: boolean
 }
 
@@ -71,7 +71,7 @@ export const StyledButton = styled(StyledFlex)<StyledButtonProps>(
          }
       `}
 
-      ${props.secondary &&
+      ${props.$secondary &&
       `
       border: 1px solid ${props.theme.colors.g.lightGray};
       color: ${props.theme.colors.g.lightGray};

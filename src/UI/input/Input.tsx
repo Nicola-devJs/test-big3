@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { StyledInput, InputLabel, InputIsViewPassword } from './StyledInput'
-import { InputInvalid } from '../inputInvalid/InputInvalid'
+import { StyledInput, InputIsViewPassword } from './StyledInput'
+import { InputLabel } from '../inputLabel/InputLabel'
 
 interface InputProps {
    label: string
    disabled?: boolean
-   type?: 'text' | 'password'
+   type?: 'text' | 'password' | 'number' | 'date'
    errorLabel?: string
 }
 type refNode = HTMLInputElement
@@ -19,8 +19,7 @@ export const Input = React.forwardRef<refNode, InputProps>(
       }
 
       return (
-         <InputLabel as="label" $direction="column" $align="flex-start">
-            {label}
+         <InputLabel label={label} errorLabel={errorLabel}>
             <StyledInput
                {...props}
                ref={ref}
@@ -33,7 +32,6 @@ export const Input = React.forwardRef<refNode, InputProps>(
                   onClick={setViewPasswordHandler}
                />
             )}
-            {errorLabel && <InputInvalid>{errorLabel}</InputInvalid>}
          </InputLabel>
       )
    }

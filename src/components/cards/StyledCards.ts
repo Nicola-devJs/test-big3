@@ -15,6 +15,14 @@ export const CardItem = styled.div(
    flex: 0 1 33.333%;
    height: 404px;
    padding: 12px;
+
+   @media(min-width: 1600px) {
+      flex: 0 1 25%;
+   }
+
+   @media(${props.theme.media.maxTablet}) {
+      flex: 0 1 50%;
+   }
 `
 )
 
