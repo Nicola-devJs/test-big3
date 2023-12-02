@@ -4,7 +4,6 @@ import { StyledFlex } from '../../../../components/styled/flex/StyledFlex'
 export const StyledRoster = styled.table(
    (props) => `
    width: 100%;
-   table-layout: fixed;
    border: 0.5px solid ${props.theme.colors.g.lightGray};
    border-radius: 10px;
    margin-top: 24px;
@@ -13,8 +12,9 @@ export const StyledRoster = styled.table(
 `
 )
 
-export const RosterRow = styled(StyledFlex)(
+export const RosterRow = styled.tr(
    (props) => `
+   display: flex;
    padding-left: 32px;
    width: 100%;
    align-items: center;
