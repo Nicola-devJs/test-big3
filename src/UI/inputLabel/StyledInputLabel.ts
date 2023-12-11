@@ -4,6 +4,7 @@ import { StyledFlex } from '../../components/styled/flex/StyledFlex'
 export const StyledInputLabel = styled(StyledFlex)(
    (props) => `
    position: relative;
+   height: max-content;
 `
 )
 

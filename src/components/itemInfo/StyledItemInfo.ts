@@ -4,43 +4,53 @@ import { StyledFlex } from '../styled/flex/StyledFlex'
 export const StyledItemInfo = styled(StyledFlex)(
    (props) => `
    width: 100%;
-   padding: 48px 48px 0px 0px;
    background: linear-gradient(276deg, #707070 0%, #393939 100.28%);
    border-radius: 0px 0px 10px 10px;
-   gap: 56px;
-
-   @media(min-width: 1440px) {
-      padding: 65px 65px 0px 0px;
-   }
 
    @media(${props.theme.media.maxNotebook}) {
       flex-direction: column;
       align-items: center;
-      padding: 48px;
-      gap: 48px;
       border-radius: 0px;
+      padding: 48px;
    }
 `
 )
 
-export const ItemInfoImg = styled.div(
+export const ItemInfoImg = styled(StyledFlex)<{ $whatPage: string }>(
    (props) => `
    flex: 0 1 50%;
+   
+   align-items: ${props.$whatPage === 'teams' ? 'center' : 'flex-end'};
+   
 
    img {
-      width: 100%;
-      height: 100%;
+      width: ${props.$whatPage === 'teams' ? '210px' : '100%'};
+      height: ${props.$whatPage === 'teams' ? '210px' : '100%'};
       object-fit: contain;
       object-position: bottom;
    }
 
+   @media(${props.theme.media.minNotebook}) {
+      padding: 0px 56px 0px 40px;
+   }
+
    @media(${props.theme.media.maxNotebook}) {
+      padding: 0px 0px 48px 0px;
       flex: 1 1 auto;
+   }
+
+   @media(${props.theme.media.maxTablet}) {
+      padding: 0px 68px 48px 68px;
       img {
          max-width: 100%;
          max-height: 100%;
-         object-position: center;
+         width: 100%;
+         height: 100%;
       }
+   }
+
+   @media(${props.theme.media.maxPhone}) {
+      padding: 0px 24px 48px 24px;
    }
 `
 )
@@ -48,12 +58,15 @@ export const ItemInfoImg = styled.div(
 export const ItemInfoContent = styled.div(
    (props) => `
    flex: 0 1 50%;
-   padding-bottom: 65px;
+   
+
+   @media(${props.theme.media.minNotebook}) {
+      padding: 65px 65px 65px 0px;
+   }
 
    @media(${props.theme.media.maxNotebook}) {
       flex: 1 1 auto;
       text-align: center;
-      padding-bottom: 0px;
    }
 `
 )

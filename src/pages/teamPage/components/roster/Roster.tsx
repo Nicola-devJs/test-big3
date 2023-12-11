@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
    StyledRoster,
    RosterRow,
@@ -7,40 +7,62 @@ import {
    RosterPlayerCell,
 } from './StyledRoster'
 
-import imgPlayer from '../../../../assets/images/player.png'
+import { useAppDispatch, useAppSelector } from '../../../../core/redux/hooks'
+import { fetchingPlayersAction } from '../../../../modules/players/playerThunk'
+import { Loading } from '../../../../components/loading/Loading'
+import { getAge } from '../../../../common/helpers/getAge'
 
-export const Roster = () => {
+interface RosterProps {
+   teamId: number
+}
+
+export const Roster: React.FC<RosterProps> = ({ teamId }) => {
+   const dispatch = useAppDispatch()
+   const { loading, body } = useAppSelector((state) => state.player)
+
+   useEffect(() => {
+      dispatch(fetchingPlayersAction({ teamIds: [teamId] }))
+   }, [])
+
    return (
-      <StyledRoster>
-         <RosterHead>
-            <RosterRow>
-               <th>Roster</th>
-            </RosterRow>
-         </RosterHead>
-         <RosterBody>
-            <RosterRow>
-               <td>#</td>
-               <td>Player</td>
-               <td>Height</td>
-               <td>Weight</td>
-               <td>Age</td>
-            </RosterRow>
-            <RosterRow>
-               <td>10</td>
-               <td>
-                  <RosterPlayerCell>
-                     <img src={imgPlayer} alt="img" />
-                     <div>
-                        <p>Bol Bol</p>
-                        <span>Centerforward</span>
-                     </div>
-                  </RosterPlayerCell>
-               </td>
-               <td>218 cm</td>
-               <td>100 kg</td>
-               <td>21</td>
-            </RosterRow>
-         </RosterBody>
-      </StyledRoster>
+      <>
+         {loading ? (
+            <Loading />
+         ) : (
+            <StyledRoster>
+               <RosterHead>
+                  <RosterRow>
+                     <th>Roster</th>
+                  </RosterRow>
+               </RosterHead>
+               <RosterBody>
+                  <RosterRow>
+                     <td>#</td>
+                     <td>Player</td>
+                     <td>Height</td>
+                     <td>Weight</td>
+                     <td>Age</td>
+                  </RosterRow>
+                  {body.data.map((player) => (
+                     <RosterRow key={player.id}>
+                        <td>{player.number}</td>
+                        <td>
+                           <RosterPlayerCell>
+                              <img src={player.avatarUrl} alt="img" />
+                              <div>
+                                 <p>{player.name}</p>
+                                 <span>{player.position}</span>
+                              </div>
+                           </RosterPlayerCell>
+                        </td>
+                        <td>{player.height} cm</td>
+                        <td>{player.weight} kg</td>
+                        <td>{getAge(player.birthday)}</td>
+                     </RosterRow>
+                  ))}
+               </RosterBody>
+            </StyledRoster>
+         )}
+      </>
    )
 }

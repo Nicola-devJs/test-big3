@@ -1,26 +1,16 @@
-import axios, { AxiosResponse } from 'axios'
+import { IAuthUserResponse } from '../dto/IAuthorization'
 import {
-   IAuthUserResponse,
    IAuthUser,
    IRegistrUser,
-} from '../dto/IAuthorization'
+} from '../../common/helpers/interfaces/requestInterfaces/RequestAuth'
+import { post } from '../baseRequest'
 
 export default class AuthService {
-   static async signIn(
-      data: IAuthUser
-   ): Promise<AxiosResponse<IAuthUserResponse>> {
-      return await axios.post(
-         'http://dev.trainee.dex-it.ru/api/Auth/SignIn',
-         data
-      )
+   static async signIn(data: IAuthUser): Promise<IAuthUserResponse> {
+      return await post('Auth/SignIn', data)
    }
 
-   static async signUp(
-      data: IRegistrUser
-   ): Promise<AxiosResponse<IAuthUserResponse>> {
-      return await axios.post(
-         'http://dev.trainee.dex-it.ru/api/Auth/SignUp',
-         data
-      )
+   static async signUp(data: IRegistrUser): Promise<IAuthUserResponse> {
+      return await post('Auth/SignUp', data)
    }
 }

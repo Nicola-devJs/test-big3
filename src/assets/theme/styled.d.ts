@@ -39,6 +39,7 @@ export enum MediaQueryToScreen {
    maxNotebook = 'max-width: 1024px',
    maxTablet = 'max-width: 768px',
    maxPhone = 'max-width: 425px',
+   minNotebook = 'min-width: 1025px',
 }
 
 declare module 'styled-components' {

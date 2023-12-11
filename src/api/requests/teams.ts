@@ -1,16 +1,36 @@
-import axios, { AxiosResponse } from 'axios'
-import { IGetTeamsParamsQuery, ITeamsResponse } from '../dto/ITeams'
+import { ITeamAdd } from '../../common/helpers/interfaces/requestInterfaces/RequestTeam'
+import { getStorage } from '../../common/helpers/localStorageHelper'
+import { get, remove, post } from '../baseRequest'
+import { IAuthUserResponse } from '../dto/IAuthorization'
+import { IGetTeamsParamsQuery, ITeamsResponse, ITeamItem } from '../dto/ITeams'
 
 export default class TeamsService {
-   static async getTeams(
-      paramsTeams: IGetTeamsParamsQuery
-   ): Promise<AxiosResponse<ITeamsResponse>> {
-      return await axios.get('http://dev.trainee.dex-it.ru/api/Team/GetTeams', {
-         params: {
-            _Name: paramsTeams.name,
-            _Page: paramsTeams.page,
-            _PageSize: paramsTeams.pageSize,
-         },
-      })
+   private static get token() {
+      const { token } = getStorage<IAuthUserResponse>(
+         'user'
+      ) as IAuthUserResponse
+      return token
+   }
+
+   static async getTeams({
+      page = 1,
+      pageSize = 6,
+   }: IGetTeamsParamsQuery): Promise<ITeamsResponse> {
+      return await get(
+         `Team/GetTeams?Page=${page}&PageSize=${pageSize}`,
+         TeamsService.token
+      )
+   }
+
+   static async getTeam(id: number): Promise<ITeamItem> {
+      return await get(`Team/Get?id=${id}`, TeamsService.token)
+   }
+
+   static async addTeam(newTeam: ITeamAdd): Promise<ITeamItem> {
+      return await post(`Team/Add`, newTeam, TeamsService.token)
+   }
+
+   static async deleteTeam(id: number): Promise<ITeamItem> {
+      return await remove(`Team/Delete?id=${id}`, TeamsService.token)
    }
 }

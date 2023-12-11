@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { StyledInput, InputIsViewPassword } from './StyledInput'
 import { InputLabel } from '../inputLabel/InputLabel'
 
+export type typeInput = 'text' | 'password' | 'number' | 'date'
+
 interface InputProps {
    label: string
    disabled?: boolean
-   type?: 'text' | 'password' | 'number' | 'date'
+   type?: typeInput
    errorLabel?: string
 }
 type refNode = HTMLInputElement

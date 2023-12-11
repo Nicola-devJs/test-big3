@@ -2,9 +2,7 @@ import { styled } from 'styled-components'
 import { StyledFlex } from '../../components/styled/flex/StyledFlex'
 import loadPhotoIcon from '../../assets/images/load-photo.png'
 
-export type typeSrsFile = string | ArrayBuffer | null
-
-export const StyledLoadPhoto = styled(StyledFlex)<{ $urlPhoto: typeSrsFile }>(
+export const StyledLoadPhoto = styled(StyledFlex)<{ $urlPhoto: string }>(
    (props) => `
    width: 336px;
    height: 261px;

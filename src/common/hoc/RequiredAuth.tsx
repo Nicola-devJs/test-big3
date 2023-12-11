@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navigate } from 'react-router-dom'
-import { RoutesNamePath } from '../pages/Routes'
-import { useAppSelector } from '../core/redux/hooks'
+import { RoutesNamePath } from '../../pages/Routes'
+import { useAppSelector } from '../../core/redux/hooks'
 
 interface RequiredAuthProps {
    children: React.ReactElement | React.ReactNode

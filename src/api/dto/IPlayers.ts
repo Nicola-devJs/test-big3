@@ -10,6 +10,10 @@ export interface IPlayerItem {
    id: number
 }
 
+export interface IGetPlayer extends IPlayerItem {
+   teamName: string
+}
+
 export interface IPlayersResponse {
    data: IPlayerItem[]
    count: number
@@ -18,8 +22,7 @@ export interface IPlayersResponse {
 }
 
 export interface IGetPlayersParamsQuery {
-   name: string
-   teamIds: number[]
-   page: number
-   pageSize: number
+   teamIds?: number[]
+   page?: number
+   pageSize?: number
 }

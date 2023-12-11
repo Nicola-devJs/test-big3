@@ -5,12 +5,13 @@ import { Players } from './players/Players'
 import { Teams } from './teams/Teams'
 import { SignIn } from './authorization/SignIn'
 import { SignUp } from './authorization/SignUp'
-import { getStorage } from '../utils/localStorageHelper'
+import { getStorage } from '../common/helpers/localStorageHelper'
 import { useAppDispatch } from '../core/redux/hooks'
 import { authSlice } from '../modules/authorization/authorizationSlice'
 import { IAuthUserResponse } from '../api/dto/IAuthorization'
 import { NotFound } from './notfound/NotFound'
-import { AddItem } from './add/AddItem'
+import { AddPlayer } from './add/AddPlayer'
+import { AddTeam } from './add/AddTeam'
 import { PlayerPage } from './playerPage/PlayerPage'
 import { TeamPage } from './teamPage/TeamPage'
 
@@ -41,12 +42,12 @@ const AppRouter = () => {
             <Route path={RoutesNamePath.TEAMS} element={<Teams />} />
             <Route
                path={`${RoutesNamePath.TEAMS}/${RoutesNamePath.ADDITEM}`}
-               element={<AddItem />}
+               element={<AddTeam />}
             />
             <Route path={RoutesNamePath.PLAYERS} element={<Players />} />
             <Route
                path={`${RoutesNamePath.PLAYERS}/${RoutesNamePath.ADDITEM}`}
-               element={<AddItem />}
+               element={<AddPlayer />}
             />
             <Route
                path={`${RoutesNamePath.PLAYERS}/:id`}

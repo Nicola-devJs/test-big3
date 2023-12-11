@@ -3,10 +3,7 @@ import { StyledEmpty, EmptyBody } from './StyledEmpty'
 import { ErrorContent } from '../errorContent/ErrorContent'
 import emptyTeams from '../../assets/images/emptyTeams.png'
 import emptyPlayers from '../../assets/images/emptyPlayers.png'
-
-interface EmptyProps {
-   typeEmptyList: 'teams' | 'players'
-}
+import { useLocation } from 'react-router-dom'
 
 const emptyImages = {
    teams: emptyTeams,
@@ -24,7 +21,12 @@ const typeSizeImg = {
    },
 }
 
-export const Empty: React.FC<EmptyProps> = ({ typeEmptyList }) => {
+type typeEmptyListType = 'teams' | 'players'
+
+export const Empty: React.FC = () => {
+   const location = useLocation()
+   const typeEmptyList = location.pathname.slice(1) as typeEmptyListType
+
    return (
       <StyledEmpty $justify="center" $align="center">
          <EmptyBody>

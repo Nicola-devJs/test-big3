@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 import { Header } from '../header/Header'
 import { Sidebar } from '../sidebar/Sidebar'
-import { RequiredAuth } from '../../hoc/RequiredAuth'
+import { RequiredAuth } from '../../common/hoc/RequiredAuth'
 import {
    StyledLayout,
    LayoutWrapperMain,

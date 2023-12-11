@@ -5,18 +5,19 @@ import { useMediaQuery } from 'react-responsive'
 
 interface AppPaginationProps {
    itemsPerPage: number
+   items: Array<any>
+   onChange: (page: number) => void
 }
 
 type selectedItem = { selected: number }
 
 export const AppPagination: React.FC<AppPaginationProps> = ({
    itemsPerPage,
+   items,
+   onChange,
 }) => {
    const isTablet = useMediaQuery({ query: '(max-width: 768px)' })
 
-   const items = Array(60)
-      .fill('')
-      .map((_, i) => i++)
    const [itemOffset, setItemOffset] = useState(0)
    const endOffset = itemOffset + itemsPerPage
    const currentItems = items.slice(itemOffset, endOffset)
@@ -25,6 +26,7 @@ export const AppPagination: React.FC<AppPaginationProps> = ({
    const handlePageClick = (event: selectedItem) => {
       const newOffset = (event.selected * itemsPerPage) % items.length
       setItemOffset(newOffset)
+      onChange(event.selected + 1)
    }
 
    return (

@@ -35,14 +35,15 @@ export const CardBody = styled(StyledFlex)(
 `
 )
 
-export const CardImg = styled(StyledFlex)(
-   () => `
+export const CardImg = styled(StyledFlex)<{ $whatPage: string }>(
+   (props) => `
    flex: 1 1 auto;
+   align-items: ${props.$whatPage === 'teams' ? 'center' : 'flex-end'};
 
    img {
-      width: 274px;
-      height: 207px;
-      object-fit: cover;
+      max-width: ${props.$whatPage === 'teams' ? 150 : 274}px;
+      max-height: ${props.$whatPage === 'teams' ? 150 : 207}px;
+      object-fit: contain;
       object-position: center;
    }
 `

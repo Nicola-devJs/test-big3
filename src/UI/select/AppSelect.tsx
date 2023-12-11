@@ -1,16 +1,29 @@
 import React from 'react'
-import Select from 'react-select'
+import AsyncSelect from 'react-select/async'
+import {
+   OptionsOrGroups,
+   GroupBase,
+   OnChangeValue,
+   ActionMeta,
+} from 'react-select'
 import { StylesSelect, StylesSelectProps } from './AppSelectStyles'
 import { InputLabel } from '../inputLabel/InputLabel'
 
-interface IOptionItem {
-   value: string
+export interface IOptionItem {
+   value: string | number
    label: string
 }
 
+export type loadOptionsType = (
+   inputValue: string,
+   callback: (
+      options: OptionsOrGroups<IOptionItem, GroupBase<IOptionItem>>
+   ) => void
+) => Promise<OptionsOrGroups<IOptionItem, GroupBase<IOptionItem>>> | void
+
 interface AppSelectProps extends StylesSelectProps {
    multi?: boolean
-   options: IOptionItem[]
+   options?: IOptionItem[]
    name: string
    isCloseMenuOnSelect?: boolean
    isClearable?: boolean
@@ -18,16 +31,20 @@ interface AppSelectProps extends StylesSelectProps {
    label?: string
    width: string
    errorLabel?: string
+   loadOptions?: loadOptionsType
+   onChange?: (
+      newValue: OnChangeValue<any, boolean>,
+      actionMeta: ActionMeta<any>
+   ) => void
 }
 
 type RefNode = any
 
-const AppSelect = React.forwardRef<RefNode, AppSelectProps>(
+export const AppSelect = React.forwardRef<RefNode, AppSelectProps>(
    (
       {
          multi,
          options,
-         name,
          width,
          isCloseMenuOnSelect = true,
          isClearable = false,
@@ -44,24 +61,22 @@ const AppSelect = React.forwardRef<RefNode, AppSelectProps>(
       return (
          <div style={{ flex: `0 1 ${width}` }}>
             <InputLabel label={label} errorLabel={errorLabel}>
-               <Select
+               <AsyncSelect
                   ref={ref}
                   {...props}
                   closeMenuOnSelect={isCloseMenuOnSelect}
                   isClearable={isClearable}
                   isMulti={multi}
-                  name={name}
-                  options={options}
+                  defaultOptions={options ? options : true}
                   className={multi ? 'basic-multi-select' : 'basic-select'}
                   classNamePrefix="select"
                   styles={stylesAppSelect}
                   menuPlacement="auto"
                   defaultValue={selectedValue ? selectedValue : null}
+                  cacheOptions
                />
             </InputLabel>
          </div>
       )
    }
 )
-
-export default AppSelect

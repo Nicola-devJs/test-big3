@@ -1,8 +1,10 @@
 import { styled } from 'styled-components'
-import { StyledFlex } from '../../components/styled/flex/StyledFlex'
+import { StyledFlex } from '../../../../components/styled/flex/StyledFlex'
 
-export const StyledAddItem = styled(StyledFlex)(
+export const StyledFormAdd = styled.form(
    (props) => `
+   display: grid;
+   grid-template-columns: max-content auto;
    width: 100%;
    padding: 48px 73px;
    border-radius: 0px 0px 10px 10px;
@@ -10,6 +12,7 @@ export const StyledAddItem = styled(StyledFlex)(
    gap: 24px;
 
    @media(max-width: 1150px) {
+      display: flex;
       flex-direction: column;
       align-items: center;
 
@@ -55,33 +58,55 @@ export const StyledAddItem = styled(StyledFlex)(
 `
 )
 
-export const AddItemFormWrapperFields = styled.div(
+export const FormAddWrapperFields = styled.div(
    (props) => `  
-   flex: 0 1 366px;
+   max-width: 366px;
+   width: 100%;
    margin: 0 auto;
 
    & > *:not(:last-child) {
       margin-bottom: 24px;
    }
 
+   @media(min-width: 1441px) {
+      width: 100%;
+      max-width: 100%;
+      padding: 0px 136px;
+   }
+
    @media(max-width: 1150px) {
       width: 100%;
-      flex: 1 1 auto;
+      max-width: 100%;
    }
 `
 )
 
-export const AddItemFormContainerButtons = styled(StyledFlex)(
+export const FormAddContainerButtons = styled(StyledFlex)(
    (props) => `
    gap: 24px;
+   grid-column: 2;
+   max-width: 366px;
+   width: 100%;
+   justify-self: center;
 
    & > button {
       width: 100%;
    }
+
+   @media(min-width: 1441px) {
+      width: 100%;
+      max-width: 100%;
+      padding: 0px 136px;
+   }
+
+   @media(max-width: 1150px) {
+      width: 100%;
+      max-width: 100%;
+   }
 `
 )
 
-export const AddItemFormContainerFields = styled(StyledFlex)(
+export const FormAddContainerFields = styled(StyledFlex)(
    (props) => `
    gap: 24px;
 

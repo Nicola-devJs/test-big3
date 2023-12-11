@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 import {
    StyledItemInfo,
    ItemInfoContent,
@@ -7,31 +8,44 @@ import {
    ItemInfoList,
    ItemInfoListItem,
 } from './StyledItemInfo'
-import photoItem from '../../assets/images/player.png'
+import { getNameRootPage } from '../../common/helpers/stringHelper'
 
-export const ItemInfo: React.FC = () => {
+export type optionsType = Array<{ label: string; value: string | number }>
+
+interface ItemInfoProps {
+   urlImg: string
+   title: string
+   titleSelected?: number
+   options: optionsType
+}
+
+export const ItemInfo: React.FC<ItemInfoProps> = ({
+   urlImg,
+   title,
+   titleSelected,
+   options,
+}) => {
+   const location = useLocation()
+
    return (
       <StyledItemInfo>
-         <ItemInfoImg>
-            <img src={photoItem} alt="item img" />
+         <ItemInfoImg
+            $justify="center"
+            $whatPage={getNameRootPage(location.pathname)}
+         >
+            <img src={urlImg} alt="img" />
          </ItemInfoImg>
          <ItemInfoContent>
             <ItemInfoTitle>
-               Greg Whittington <span>#22</span>
+               {title} {titleSelected ? <span>#{titleSelected}</span> : ''}
             </ItemInfoTitle>
             <ItemInfoList as={'ul'} $justify="space-between">
-               <ItemInfoListItem>
-                  <p>Position</p>
-                  <span>Forward</span>
-               </ItemInfoListItem>
-               <ItemInfoListItem>
-                  <p>Position</p>
-                  <span>Forward</span>
-               </ItemInfoListItem>
-               <ItemInfoListItem>
-                  <p>Position</p>
-                  <span>Forward</span>
-               </ItemInfoListItem>
+               {options.map((item) => (
+                  <ItemInfoListItem key={item.label}>
+                     <p>{item.label}</p>
+                     <span>{item.value}</span>
+                  </ItemInfoListItem>
+               ))}
             </ItemInfoList>
          </ItemInfoContent>
       </StyledItemInfo>
