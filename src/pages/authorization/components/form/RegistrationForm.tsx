@@ -19,7 +19,7 @@ interface IRegistrForm {
 }
 
 export const RegistrationForm: React.FC = () => {
-   const { isLoading, auth } = useAppSelector((state) => state.auth)
+   const { loading, auth } = useAppSelector((state) => state.auth)
    const dispatch = useAppDispatch()
    const navigate = useNavigate()
    const {
@@ -27,7 +27,7 @@ export const RegistrationForm: React.FC = () => {
       register,
       formState: { errors },
       reset,
-   } = useForm<IRegistrForm>({ mode: 'onBlur' })
+   } = useForm<IRegistrForm>({ mode: 'onChange' })
 
    function submitHandler(data: IRegistrForm) {
       const newUser = {
@@ -44,7 +44,7 @@ export const RegistrationForm: React.FC = () => {
          reset()
       }
       return () => {
-         dispatch(authSlice.actions.authLoginError(''))
+         dispatch(authSlice.actions.clearError())
       }
    }, [auth])
 
@@ -92,7 +92,7 @@ export const RegistrationForm: React.FC = () => {
             label="I accept the agreement"
             errorLabel={errors.check && errors.check.message}
          />
-         <Button width="100%" $loading={isLoading}>
+         <Button width="100%" $loading={loading}>
             Sign Up
          </Button>
       </StyledAuthorizationForm>

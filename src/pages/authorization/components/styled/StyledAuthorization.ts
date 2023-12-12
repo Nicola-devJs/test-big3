@@ -3,7 +3,7 @@ import { StyledFlex } from '../../../../components/styled/flex/StyledFlex'
 import pictureSignIn from '../../../../assets/images/signin.png'
 import pictureSignUp from '../../../../assets/images/signup.png'
 
-export const StyledAuth = styled(StyledFlex)<{ $error: string }>(
+export const StyledAuth = styled(StyledFlex)<{ $error: string | undefined }>(
    (props) => css`
       width: 100%;
       height: 100vh;

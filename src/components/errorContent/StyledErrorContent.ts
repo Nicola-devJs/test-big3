@@ -1,4 +1,5 @@
 import { styled } from 'styled-components'
+import { StyledFlex } from '../styled/flex/StyledFlex'
 
 export interface ErrorImgProps {
    $sizeImg: {
@@ -7,11 +8,23 @@ export interface ErrorImgProps {
    }
 }
 
+export const StyledError = styled(StyledFlex)(
+   (props) => `
+   width: 100%;
+   height: 100%;
+`
+)
+
+export const ErrorBody = styled.div`
+   text-align: center;
+   padding: 48px 18px;
+`
+
 export const ErrorImg = styled.div<ErrorImgProps>(
    (props) => `
    max-width: ${props.$sizeImg.w}px;
    max-height: ${props.$sizeImg.h}px;
-   margin-bottom: 48px;
+   margin: 0 auto 48px;
 
    img {
       width: 100%;

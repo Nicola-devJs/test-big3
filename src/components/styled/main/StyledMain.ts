@@ -11,6 +11,10 @@ export const MainBody = styled(StyledFlex)(
    padding: 32px 80px;
    width: 100%;
 
+   @media(${props.theme.media.maxNotebook}) {
+      padding: 24px 40px;
+   }
+
    @media(${props.theme.media.maxTablet}) {
       padding: 24px;
    }

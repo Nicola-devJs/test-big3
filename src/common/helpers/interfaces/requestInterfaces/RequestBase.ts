@@ -6,4 +6,5 @@ export interface IRequestBaseBody {
 export interface IFetchingRejected {
    isCustomError: boolean
    status: number
+   statusText: string
 }

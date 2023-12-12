@@ -14,6 +14,7 @@ import {
 } from '../../modules/players/playerThunk'
 import { Loading } from '../../components/loading/Loading'
 import { getAge } from '../../common/helpers/getAge'
+import { RoutesNamePath } from '../Routes'
 
 export const PlayerPage: React.FC = () => {
    const { loading, currentPlayer } = useAppSelector((state) => state.player)
@@ -46,11 +47,21 @@ export const PlayerPage: React.FC = () => {
          : null
    }
 
+   const editPlayerHandler = () => {
+      navigate(
+         `${RoutesNamePath.PLAYERS}/${currentPlayer.id}/${RoutesNamePath.EDITITEM}`,
+         { state: currentPlayer }
+      )
+   }
+
    return (
       <Main>
-         <Breadcrumbs $border prefixParam="">
+         <Breadcrumbs $border currentPage={currentPlayer.name}>
             <ItemInfoTools>
-               <ItemInfoToolsItem className="icon-edit" />
+               <ItemInfoToolsItem
+                  className="icon-edit"
+                  onClick={editPlayerHandler}
+               />
                <ItemInfoToolsItem
                   className="icon-delete"
                   $red

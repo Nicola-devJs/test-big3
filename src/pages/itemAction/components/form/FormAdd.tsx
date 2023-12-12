@@ -1,25 +1,28 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FieldValues, useForm } from 'react-hook-form'
+import { DefaultValues, FieldValues, useForm } from 'react-hook-form'
 import { StyledFormAdd, FormAddContainerButtons } from './StyledFormAdd'
 import { Button } from '../../../../UI/button/Button'
 import { getChildrenForForm } from '../../helpers/getChildrenForForm'
-import { useAppSelector } from '../../../../core/redux/hooks'
 
 interface FormAddProps<T> {
    handler: (data: T) => void
    children: React.ReactElement[] | React.ReactElement
+   isLoading: boolean
+   defaultValues?: DefaultValues<T>
 }
 
 export function FormAdd<T extends FieldValues>({
    children,
    handler,
+   isLoading,
+   defaultValues,
 }: FormAddProps<T>) {
    const { handleSubmit, register, formState, control } = useForm<T>({
       mode: 'onChange',
+      defaultValues,
    })
    const navigate = useNavigate()
-   const { loading } = useAppSelector((state) => state.team)
 
    return (
       <StyledFormAdd onSubmit={handleSubmit(handler)}>
@@ -29,7 +32,7 @@ export function FormAdd<T extends FieldValues>({
             <Button type="button" $secondary onClick={() => navigate(-1)}>
                Cancel
             </Button>
-            <Button type="submit" $loading={loading}>
+            <Button type="submit" $loading={isLoading}>
                Save
             </Button>
          </FormAddContainerButtons>

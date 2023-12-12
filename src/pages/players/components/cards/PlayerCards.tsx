@@ -2,12 +2,17 @@ import React from 'react'
 import { IPlayerItem } from '../../../../api/dto/IPlayers'
 import { CardsWrapper } from '../../../../components/card/StyledCards'
 import { Card } from '../../../../components/card/Card'
+import { useAppSelector } from '../../../../core/redux/hooks'
 
 interface PlayerCardsProps {
    list: IPlayerItem[]
 }
 
 export const PlayerCards: React.FC<PlayerCardsProps> = ({ list }) => {
+   const { body } = useAppSelector((state) => state.team)
+   const teamsKit = new Map()
+   body.data.forEach((team) => teamsKit.set(team.id, team.name))
+
    return (
       <CardsWrapper>
          {list.map((item) => (
@@ -16,7 +21,7 @@ export const PlayerCards: React.FC<PlayerCardsProps> = ({ list }) => {
                id={item.id}
                urlImg={item.avatarUrl}
                title={item.name}
-               subTitle={item.position}
+               subTitle={teamsKit.get(item.team)}
                titleSelected={item.number}
             />
          ))}

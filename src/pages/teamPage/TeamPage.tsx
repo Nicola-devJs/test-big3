@@ -14,6 +14,7 @@ import {
    fetchGetTeamAction,
 } from '../../modules/teams/teamThunk'
 import { Loading } from '../../components/loading/Loading'
+import { RoutesNamePath } from '../Routes'
 
 export const TeamPage: React.FC = () => {
    const navigate = useNavigate()
@@ -42,11 +43,21 @@ export const TeamPage: React.FC = () => {
          : null
    }
 
+   const editTeamHandler = () => {
+      navigate(
+         `${RoutesNamePath.TEAMS}/${currentTeam.id}/${RoutesNamePath.EDITITEM}`,
+         { state: currentTeam }
+      )
+   }
+
    return (
       <Main>
          <Breadcrumbs $border currentPage={currentTeam.name}>
             <ItemInfoTools>
-               <ItemInfoToolsItem className="icon-edit" />
+               <ItemInfoToolsItem
+                  className="icon-edit"
+                  onClick={editTeamHandler}
+               />
                <ItemInfoToolsItem
                   className="icon-delete"
                   $red

@@ -22,7 +22,7 @@ export interface IPlayersResponse {
 }
 
 export interface IGetPlayersParamsQuery {
-   teamIds?: number[]
+   teamId?: number
    page?: number
    pageSize?: number
 }

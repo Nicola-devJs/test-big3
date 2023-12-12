@@ -15,6 +15,6 @@ export interface ITeamsResponse {
 }
 
 export interface IGetTeamsParamsQuery {
-   page: number
-   pageSize: number
+   page?: number
+   pageSize?: number
 }

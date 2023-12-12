@@ -7,7 +7,10 @@ import {
 } from '../../api/dto/IPlayers'
 import { IFetchingRejected } from '../../common/helpers/interfaces/requestInterfaces/RequestBase'
 import PlayerService from '../../api/requests/players'
-import { IAddPlayer } from '../../common/helpers/interfaces/requestInterfaces/RequestPlayer'
+import {
+   IAddPlayer,
+   IUpdatePlayer,
+} from '../../common/helpers/interfaces/requestInterfaces/RequestPlayer'
 
 export const fetchingPlayersAction = createAsyncThunk<
    IPlayersResponse,
@@ -52,6 +55,18 @@ export const deletePlayerAction = createAsyncThunk<
 >('player/deletePlayer', async (id, thunkAPI) => {
    try {
       return await PlayerService.deletePlayer(id)
+   } catch (e) {
+      return thunkAPI.rejectWithValue(e as IFetchingRejected)
+   }
+})
+
+export const updatePlayerAction = createAsyncThunk<
+   IPlayerItem,
+   IUpdatePlayer,
+   { rejectValue: IFetchingRejected }
+>('player/updatePlayer', async (updatePlayer, thunkAPI) => {
+   try {
+      return await PlayerService.updatePlayer(updatePlayer)
    } catch (e) {
       return thunkAPI.rejectWithValue(e as IFetchingRejected)
    }

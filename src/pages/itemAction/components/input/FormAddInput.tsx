@@ -1,5 +1,11 @@
 import React from 'react'
-import { FieldValues, FormState, Path, UseFormRegister } from 'react-hook-form'
+import {
+   FieldValues,
+   FormState,
+   Path,
+   RegisterOptions,
+   UseFormRegister,
+} from 'react-hook-form'
 import { Input, typeInput } from '../../../../UI/input/Input'
 
 interface FormAddInputProps<T extends FieldValues> {
@@ -9,6 +15,7 @@ interface FormAddInputProps<T extends FieldValues> {
    label: string
    type?: typeInput
    control?: any
+   options?: RegisterOptions<T>
 }
 
 export function FormAddInput<T extends FieldValues>({
@@ -16,6 +23,7 @@ export function FormAddInput<T extends FieldValues>({
    register,
    formState,
    control,
+   options,
    ...props
 }: FormAddInputProps<T>) {
    const errorLabel = formState ? formState.errors[name]?.message : ''
@@ -23,7 +31,7 @@ export function FormAddInput<T extends FieldValues>({
       <>
          {register && (
             <Input
-               {...register(name, { required: 'Required' })}
+               {...register(name, { required: 'Required', ...options })}
                errorLabel={errorLabel as string}
                {...props}
             />

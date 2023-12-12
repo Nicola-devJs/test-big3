@@ -21,7 +21,7 @@ export const Roster: React.FC<RosterProps> = ({ teamId }) => {
    const { loading, body } = useAppSelector((state) => state.player)
 
    useEffect(() => {
-      dispatch(fetchingPlayersAction({ teamIds: [teamId] }))
+      dispatch(fetchingPlayersAction({ teamId }))
    }, [])
 
    return (

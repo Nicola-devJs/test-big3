@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { StyledAuthorizationForm } from './styled/StyledAuthorizationForm'
 import { Input } from '../../../../UI/input/Input'
@@ -6,7 +7,6 @@ import { Button } from '../../../../UI/button/Button'
 import { authUserAction } from '../../../../modules/authorization/authorizationThunk'
 import { useAppDispatch, useAppSelector } from '../../../../core/redux/hooks'
 import { authSlice } from '../../../../modules/authorization/authorizationSlice'
-import { useNavigate } from 'react-router-dom'
 import { RoutesNamePath } from '../../../Routes'
 
 interface IAuthForm {
@@ -15,7 +15,7 @@ interface IAuthForm {
 }
 
 export const AuthorizationForm: React.FC = () => {
-   const { isLoading, auth } = useAppSelector((state) => state.auth)
+   const { loading, auth } = useAppSelector((state) => state.auth)
    const dispatch = useAppDispatch()
    const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ export const AuthorizationForm: React.FC = () => {
       register,
       formState: { errors },
       reset,
-   } = useForm<IAuthForm>({ mode: 'onBlur' })
+   } = useForm<IAuthForm>({ mode: 'onChange' })
 
    function submitHandler(data: IAuthForm) {
       dispatch(authUserAction(data))
@@ -36,7 +36,7 @@ export const AuthorizationForm: React.FC = () => {
          navigate(RoutesNamePath.TEAMS)
       }
       return () => {
-         dispatch(authSlice.actions.authLoginError(''))
+         dispatch(authSlice.actions.clearError())
       }
    }, [auth])
 
@@ -57,7 +57,7 @@ export const AuthorizationForm: React.FC = () => {
             label="password"
             errorLabel={errors.password && errors.password.message}
          />
-         <Button width="100%" $loading={isLoading}>
+         <Button width="100%" $loading={loading}>
             Sign In
          </Button>
       </StyledAuthorizationForm>

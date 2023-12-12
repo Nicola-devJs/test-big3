@@ -13,11 +13,11 @@ import { AppSelect, IOptionItem } from '../../UI/select/AppSelect'
 import { RoutesNamePath } from '../Routes'
 import { useAppDispatch, useAppSelector } from '../../core/redux/hooks'
 import { fetchingTeamsAction } from '../../modules/teams/teamThunk'
-import { Loading } from '../../components/loading/Loading'
 import { TeamCards } from './components/cards/TeamCards'
-import { Empty } from '../../components/empty/Empty'
 import { teamSlice } from '../../modules/teams/teamSlice'
 import { OPTIONS_NUMBER_PAGES } from '../../common/constants/numberPages'
+import { useDebounce } from '../../common/hooks/debounce'
+import { ViewContent } from '../../components/viewContent/ViewContent'
 
 export const Teams = () => {
    const { teamsSearchQuery } = teamSlice.actions
@@ -28,15 +28,19 @@ export const Teams = () => {
    const navigate = useNavigate()
 
    const [valueSearch, setValueSearch] = useState<string>('')
-   const selectPerPage = useRef(null)
+   const debounceCallback = useDebounce(callbackSearchQuery, 500)
 
    useEffect(() => {
       dispatch(fetchingTeamsAction({ page: body.page, pageSize: body.size }))
    }, [dispatch])
 
-   const filterByNamesHandler = (event: ChangeEvent<HTMLInputElement>) => {
+   function callbackSearchQuery(valueSearch: string) {
+      dispatch(teamsSearchQuery(valueSearch))
+   }
+
+   const searchByNamesHandler = (event: ChangeEvent<HTMLInputElement>) => {
       setValueSearch(event.target.value)
-      dispatch(teamsSearchQuery(event.target.value))
+      debounceCallback(event.target.value)
    }
 
    const changePageHandler = (pageNumber: number) => {
@@ -58,20 +62,16 @@ export const Teams = () => {
             <Search
                width="364px"
                value={valueSearch}
-               onChange={filterByNamesHandler}
+               onChange={searchByNamesHandler}
             />
             <Button $icon="+" onClick={() => navigate(RoutesNamePath.ADDITEM)}>
                Add
             </Button>
          </MainToolbar>
          <MainContent>
-            {loading ? (
-               <Loading />
-            ) : sortedTeam.length ? (
+            <ViewContent loading={loading} error={error} list={sortedTeam}>
                <TeamCards list={sortedTeam} />
-            ) : (
-               <Empty />
-            )}
+            </ViewContent>
          </MainContent>
          <MainPagination>
             <AppPagination
@@ -84,7 +84,6 @@ export const Teams = () => {
                name="items-per-page-select"
                options={OPTIONS_NUMBER_PAGES}
                selectedValue={OPTIONS_NUMBER_PAGES[0]}
-               ref={selectPerPage}
                onChange={changePerPageHandler}
             />
          </MainPagination>

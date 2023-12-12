@@ -6,7 +6,10 @@ import {
 } from '../../api/dto/ITeams'
 import TeamsService from '../../api/requests/teams'
 import { IFetchingRejected } from '../../common/helpers/interfaces/requestInterfaces/RequestBase'
-import { ITeamAdd } from '../../common/helpers/interfaces/requestInterfaces/RequestTeam'
+import {
+   IAddTeam,
+   IUpdateTeam,
+} from '../../common/helpers/interfaces/requestInterfaces/RequestTeam'
 
 export const fetchingTeamsAction = createAsyncThunk<
    ITeamsResponse,
@@ -46,11 +49,23 @@ export const deleteTeamAction = createAsyncThunk<
 
 export const addTeamAction = createAsyncThunk<
    ITeamItem,
-   ITeamAdd,
+   IAddTeam,
    { rejectValue: IFetchingRejected }
 >('team/addTeam', async (newTeam, thunkAPI) => {
    try {
       return await TeamsService.addTeam(newTeam)
+   } catch (e) {
+      return thunkAPI.rejectWithValue(e as IFetchingRejected)
+   }
+})
+
+export const updateTeamAction = createAsyncThunk<
+   ITeamItem,
+   IUpdateTeam,
+   { rejectValue: IFetchingRejected }
+>('team/updateTeam', async (updateTeam, thunkAPI) => {
+   try {
+      return await TeamsService.updateTeam(updateTeam)
    } catch (e) {
       return thunkAPI.rejectWithValue(e as IFetchingRejected)
    }

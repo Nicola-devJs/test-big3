@@ -4,10 +4,13 @@ import {
    IPlayerItem,
    IPlayersResponse,
 } from '../dto/IPlayers'
-import { get, post, remove } from '../baseRequest'
+import { get, post, put, remove } from '../baseRequest'
 import { getStorage } from '../../common/helpers/localStorageHelper'
 import { IAuthUserResponse } from '../dto/IAuthorization'
-import { IAddPlayer } from '../../common/helpers/interfaces/requestInterfaces/RequestPlayer'
+import {
+   IAddPlayer,
+   IUpdatePlayer,
+} from '../../common/helpers/interfaces/requestInterfaces/RequestPlayer'
 
 export default class PlayerService {
    private static get token() {
@@ -20,16 +23,12 @@ export default class PlayerService {
    static async getPlayers({
       page = 1,
       pageSize = 6,
-      teamIds = [],
+      teamId,
    }: IGetPlayersParamsQuery): Promise<IPlayersResponse> {
-      // %5B456%5D
-      // %5B123%2C%20120%5D
-      // %5B456%2C%20652%5D
-      // %5B456%2C%20652%2C%20132%5D
-      const teamsIdsForat =
-         teamIds.map((id) => `%5B${id}`).join('%2C%20') + '%5D'
+      const paramCurrentTeam = teamId ? `TeamIds=${teamId}` : ''
+
       return await get(
-         `Player/GetPlayers?Page=${page}&PageSize=${pageSize}&teamsIds=${teamsIdsForat}`,
+         `Player/GetPlayers?Page=${page}&PageSize=${pageSize}&${paramCurrentTeam}`,
          PlayerService.token
       )
    }
@@ -44,6 +43,12 @@ export default class PlayerService {
 
    static async deletePlayer(id: number): Promise<IPlayerItem> {
       return await remove(`Player/Delete?id=${id}`, PlayerService.token)
+   }
+
+   static async updatePlayer(
+      updatePlayer: IUpdatePlayer
+   ): Promise<IPlayerItem> {
+      return await put(`Player/Update`, updatePlayer, PlayerService.token)
    }
 
    static async getPositions(): Promise<Array<string>> {

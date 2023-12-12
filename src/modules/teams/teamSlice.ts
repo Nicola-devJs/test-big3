@@ -5,6 +5,7 @@ import {
    fetchGetTeamAction,
    deleteTeamAction,
    addTeamAction,
+   updateTeamAction,
 } from './teamThunk'
 import { IFetchingRejected } from '../../common/helpers/interfaces/requestInterfaces/RequestBase'
 
@@ -66,6 +67,20 @@ export const teamSlice = createSlice({
          .addCase(addTeamAction.fulfilled, (state, action) => {
             state.loading = false
             state.body.data.push(action.payload)
+         })
+         .addCase(addTeamAction.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
+         })
+         .addCase(updateTeamAction.pending, (state) => {
+            state.loading = true
+         })
+         .addCase(updateTeamAction.fulfilled, (state, action) => {
+            state.loading = false
+         })
+         .addCase(updateTeamAction.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
          })
          .addCase(deleteTeamAction.pending, (state) => {
             state.loading = true

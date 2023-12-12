@@ -1,4 +1,7 @@
-import { IRequestBaseBody } from '../common/helpers/interfaces/requestInterfaces/RequestBase'
+import {
+   IFetchingRejected,
+   IRequestBaseBody,
+} from '../common/helpers/interfaces/requestInterfaces/RequestBase'
 import { RequestGenericType } from '../common/helpers/types/types'
 
 // @ts-ignore
@@ -43,7 +46,11 @@ const request = async (
    }
 
    // eslint-disable-next-line no-throw-literal
-   throw { isCustomError: true, status: response.status }
+   throw {
+      isCustomError: true,
+      status: response.status,
+      statusText: response.statusText,
+   } as IFetchingRejected
 }
 
 export const get = (url: string, token?: string) =>

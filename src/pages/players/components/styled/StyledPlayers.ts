@@ -10,7 +10,7 @@ export const ToolbarWrapper = styled(StyledFlex)(
       gap: 16px;
       & > * {
          flex: 1 1 100% !important;
-         
+         max-width: 100% !important;
       }
      
    }

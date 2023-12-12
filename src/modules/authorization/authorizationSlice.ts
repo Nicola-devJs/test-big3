@@ -1,11 +1,12 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { IAuthUserResponse } from '../../api/dto/IAuthorization'
+import { authUserAction, registrUserAction } from './authorizationThunk'
 
 interface IItitalState {
    auth: boolean
    user: IAuthUserResponse
-   error: string
-   isLoading: boolean
+   error: string | undefined
+   loading: boolean
 }
 
 const initialState = {
@@ -15,8 +16,8 @@ const initialState = {
       avatarUrl: null,
       token: '',
    },
-   error: '',
-   isLoading: false,
+   error: undefined,
+   loading: false,
 } as IItitalState
 
 export const authSlice = createSlice({
@@ -26,20 +27,41 @@ export const authSlice = createSlice({
       authLogin: (state, action: PayloadAction<IAuthUserResponse>) => {
          state.auth = true
          state.user = action.payload
-         state.error = ''
-         state.isLoading = false
-      },
-      authLoginLoading: (state) => {
-         state.isLoading = true
-      },
-      authLoginError: (state, action: PayloadAction<string>) => {
-         state.error = action.payload
-         state.isLoading = false
       },
       authLogout: (state) => {
          state.auth = false
          state.user = initialState.user
       },
+      clearError: (state) => {
+         state.error = ''
+      },
+   },
+   extraReducers(builder) {
+      builder
+         .addCase(authUserAction.pending, (state) => {
+            state.loading = true
+         })
+         .addCase(authUserAction.fulfilled, (state, action) => {
+            state.auth = true
+            state.loading = false
+            state.user = action.payload
+         })
+         .addCase(authUserAction.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
+         })
+         .addCase(registrUserAction.pending, (state) => {
+            state.loading = true
+         })
+         .addCase(registrUserAction.fulfilled, (state, action) => {
+            state.auth = true
+            state.loading = false
+            state.user = action.payload
+         })
+         .addCase(registrUserAction.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
+         })
    },
 })
 

@@ -1,4 +1,4 @@
-export interface ITeamAdd {
+export interface IAddTeam {
    name: string
    foundationYear: number
    division: string
@@ -6,6 +6,6 @@ export interface ITeamAdd {
    imageUrl: string
 }
 
-export interface ITeamUpdate extends ITeamAdd {
+export interface IUpdateTeam extends IAddTeam {
    id: number
 }

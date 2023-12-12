@@ -4,7 +4,6 @@ import { StyledFlex } from '../styled/flex/StyledFlex'
 export const CardsWrapper = styled(StyledFlex)(
    (props) => `
    min-width: 100%;
-   flex-wrap: wrap;
    margin: -12px;
 
 `
@@ -20,8 +19,13 @@ export const CardItem = styled.div(
       flex: 0 1 25%;
    }
 
-   @media(${props.theme.media.maxTablet}) {
+   @media(${props.theme.media.maxNotebook}) {
       flex: 0 1 50%;
+   }
+
+   @media(${props.theme.media.maxTablet}) {
+      height: auto;
+      min-height: 180px;
    }
 `
 )
@@ -41,10 +45,22 @@ export const CardImg = styled(StyledFlex)<{ $whatPage: string }>(
    align-items: ${props.$whatPage === 'teams' ? 'center' : 'flex-end'};
 
    img {
-      max-width: ${props.$whatPage === 'teams' ? 150 : 274}px;
-      max-height: ${props.$whatPage === 'teams' ? 150 : 207}px;
-      object-fit: contain;
-      object-position: center;
+      width: ${props.$whatPage === 'teams' ? 150 : 274}px;
+      height: ${props.$whatPage === 'teams' ? 150 : 207}px;
+      object-fit: cover;
+      object-position: bottom;
+   }
+
+   @media(${props.theme.media.maxTablet}) {
+      padding: ${
+         props.$whatPage === 'teams' ? '32px 56px 25px' : '11px 24px 0px'
+      } ;
+      img {
+         width: 100%;
+         height: 100%;
+
+         object-fit: contain;
+      }
    }
 `
 )
@@ -76,6 +92,25 @@ export const CardInfo = styled.div(
       font-size: 14px;
       color: ${props.theme.colors.g.lightGray};
       
+   }
+
+   @media(${props.theme.media.maxTablet}) {
+      padding: 16px 3px;
+      height: max-content;
+      h4 {
+         font-size: 15px;
+         font-family: ${props.theme.fonts.primary};
+         font-weight: 500;
+         margin-bottom: 6px;
+      }
+
+      p {
+         font-size: 13px;
+      }
+   }
+
+   @media(${props.theme.media.maxPhone}) {
+      padding: 12px 3px;
    }
 `
 )

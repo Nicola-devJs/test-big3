@@ -59,7 +59,7 @@ export const AppSelect = React.forwardRef<RefNode, AppSelectProps>(
       const stylesAppSelect = StylesSelect({ $form })
 
       return (
-         <div style={{ flex: `0 1 ${width}` }}>
+         <div style={{ flex: `0 1 ${width}`, maxWidth: width }}>
             <InputLabel label={label} errorLabel={errorLabel}>
                <AsyncSelect
                   ref={ref}
@@ -68,8 +68,7 @@ export const AppSelect = React.forwardRef<RefNode, AppSelectProps>(
                   isClearable={isClearable}
                   isMulti={multi}
                   defaultOptions={options ? options : true}
-                  className={multi ? 'basic-multi-select' : 'basic-select'}
-                  classNamePrefix="select"
+                  isSearchable={false}
                   styles={stylesAppSelect}
                   menuPlacement="auto"
                   defaultValue={selectedValue ? selectedValue : null}

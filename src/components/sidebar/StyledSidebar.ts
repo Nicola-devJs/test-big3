@@ -8,7 +8,7 @@ export interface StyledSidebarProps {
 
 export const StyledSidebar = styled.aside<StyledSidebarProps>(
    (props) => `
-      width: ${props.theme.sizeBlock.widthSidebar};
+      min-width: ${props.theme.sizeBlock.widthSidebar};
       background: #fff;
       
 

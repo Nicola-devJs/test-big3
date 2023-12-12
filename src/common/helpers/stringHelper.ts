@@ -3,9 +3,10 @@ export const capitalizeWorld = (world: string): string => {
 }
 
 export const getNameRootPage = (path: string): string => {
-   const subStr =
-      path.lastIndexOf('/') === 0 ? path.length : path.lastIndexOf('/')
-   return path.slice(path.indexOf('/') + 1, subStr)
+   const pattern = /[^\/]+/
+
+   const result = path.match(pattern)
+   return result ? result[0] : path
 }
 
 export const singularWorld = (str: string, cases?: 'u' | 'l'): string => {

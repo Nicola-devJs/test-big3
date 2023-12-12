@@ -11,17 +11,15 @@ import { Search } from '../../UI/search/Search'
 import { AppSelect, IOptionItem } from '../../UI/select/AppSelect'
 import { Button } from '../../UI/button/Button'
 import { AppPagination } from '../../UI/paginate/AppPagination'
-import { Empty } from '../../components/empty/Empty'
 import { RoutesNamePath } from '../Routes'
 import { useAppDispatch, useAppSelector } from '../../core/redux/hooks'
-import { Loading } from '../../components/loading/Loading'
 import { PlayerCards } from './components/cards/PlayerCards'
 import { fetchingPlayersAction } from '../../modules/players/playerThunk'
-import TeamsService from '../../api/requests/teams'
-import { ITeamItem } from '../../api/dto/ITeams'
 import { OPTIONS_NUMBER_PAGES } from '../../common/constants/numberPages'
 import { playerSlice } from '../../modules/players/playerSlice'
-import { IPlayerItem } from '../../api/dto/IPlayers'
+import { promiseOptionsTeamsName } from '../../common/helpers/promiseLoadOptions'
+import { useDebounce } from '../../common/hooks/debounce'
+import { ViewContent } from '../../components/viewContent/ViewContent'
 
 export const Players = () => {
    const { playersSearchQuery, sortedPlayersByTeams } = playerSlice.actions
@@ -31,33 +29,19 @@ export const Players = () => {
    const dispatch = useAppDispatch()
    const navigate = useNavigate()
    const [valueSearch, setValueSearch] = useState<string>('')
+   const debounceCallback = useDebounce(callbackSearchQuery, 500)
 
    useEffect(() => {
       dispatch(fetchingPlayersAction({ page: body.page, pageSize: body.size }))
    }, [])
 
-   const filterByNamesHandler = (event: ChangeEvent<HTMLInputElement>) => {
-      setValueSearch(event.target.value)
-      dispatch(playersSearchQuery(event.target.value))
+   function callbackSearchQuery(valueSearch: string) {
+      dispatch(playersSearchQuery(valueSearch))
    }
 
-   const promiseOptionsTeamsName = async (
-      _: any,
-      callback: (options: IOptionItem[]) => void
-   ) => {
-      try {
-         const response = await TeamsService.getTeams({ page: 1, pageSize: 24 })
-
-         const options = response.data.map((team) => ({
-            value: team.id,
-            label: team.name,
-         }))
-         callback(options)
-
-         return options
-      } catch (e) {
-         return []
-      }
+   const searchByNamesHandler = (event: ChangeEvent<HTMLInputElement>) => {
+      setValueSearch(event.target.value)
+      debounceCallback(event.target.value)
    }
 
    const changePageHandler = (pageNumber: number) => {
@@ -74,7 +58,10 @@ export const Players = () => {
    }
 
    const filterPlayersByTeams = (options: IOptionItem[]) => {
-      dispatch(sortedPlayersByTeams(options[options.length - 1]))
+      const valueIdTeams = options.map(
+         (option) => option.value
+      ) as Array<number>
+      dispatch(sortedPlayersByTeams(valueIdTeams))
    }
 
    return (
@@ -84,7 +71,7 @@ export const Players = () => {
                <Search
                   width="364px"
                   value={valueSearch}
-                  onChange={filterByNamesHandler}
+                  onChange={searchByNamesHandler}
                />
                <AppSelect
                   width="364px"
@@ -100,13 +87,9 @@ export const Players = () => {
             </Button>
          </MainToolbar>
          <MainContent>
-            {loading ? (
-               <Loading />
-            ) : sortedPlayers.length ? (
+            <ViewContent list={sortedPlayers} loading={loading} error={error}>
                <PlayerCards list={sortedPlayers} />
-            ) : (
-               <Empty />
-            )}
+            </ViewContent>
          </MainContent>
          <MainPagination>
             <AppPagination
