@@ -17,15 +17,9 @@ export const AppPagination: React.FC<AppPaginationProps> = ({
    onChange,
 }) => {
    const isTablet = useMediaQuery({ query: '(max-width: 768px)' })
-   const itemsMoc = Array(60).fill('')
-   const [itemOffset, setItemOffset] = useState(0)
-   const endOffset = itemOffset + itemsPerPage
-   const currentItems = itemsMoc.slice(itemOffset, endOffset)
-   const pageCount = Math.ceil(itemsMoc.length / itemsPerPage)
+   const pageCount = Math.ceil(items.length / itemsPerPage)
 
    const handlePageClick = (event: selectedItem) => {
-      const newOffset = (event.selected * itemsPerPage) % itemsMoc.length
-      setItemOffset(newOffset)
       onChange(event.selected + 1)
    }
 

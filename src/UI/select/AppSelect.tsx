@@ -1,13 +1,14 @@
 import React from 'react'
-import AsyncSelect from 'react-select/async'
+import AsyncSelect, { AsyncProps } from 'react-select/async'
 import {
    OptionsOrGroups,
    GroupBase,
    OnChangeValue,
    ActionMeta,
 } from 'react-select'
-import { StylesSelect, StylesSelectProps } from './AppSelectStyles'
+import { StylesSelect } from './AppSelectStyles'
 import { InputLabel } from '../inputLabel/InputLabel'
+import { SelectComponents } from 'react-select/dist/declarations/src/components'
 
 export interface IOptionItem {
    value: string | number
@@ -21,20 +22,25 @@ export type loadOptionsType = (
    ) => void
 ) => Promise<OptionsOrGroups<IOptionItem, GroupBase<IOptionItem>>> | void
 
-interface AppSelectProps extends StylesSelectProps {
+interface AppSelectProps
+   extends AsyncProps<IOptionItem, boolean, GroupBase<IOptionItem>> {
    multi?: boolean
    options?: IOptionItem[]
    name: string
    isCloseMenuOnSelect?: boolean
    isClearable?: boolean
    selectedValue?: IOptionItem
+   components?: Partial<
+      SelectComponents<IOptionItem, boolean, GroupBase<IOptionItem>>
+   >
    label?: string
    width: string
+   $form?: boolean
    errorLabel?: string
    loadOptions?: loadOptionsType
    onChange?: (
-      newValue: OnChangeValue<any, boolean>,
-      actionMeta: ActionMeta<any>
+      newValue: OnChangeValue<IOptionItem, boolean>,
+      actionMeta: ActionMeta<IOptionItem>
    ) => void
 }
 

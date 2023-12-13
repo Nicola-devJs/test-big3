@@ -18,6 +18,7 @@ import { teamSlice } from '../../modules/teams/teamSlice'
 import { OPTIONS_NUMBER_PAGES } from '../../common/constants/numberPages'
 import { useDebounce } from '../../common/hooks/debounce'
 import { ViewContent } from '../../components/viewContent/ViewContent'
+import { OnChangeValue } from 'react-select'
 
 export const Teams = () => {
    const { teamsSearchQuery } = teamSlice.actions
@@ -47,7 +48,10 @@ export const Teams = () => {
       dispatch(fetchingTeamsAction({ page: pageNumber, pageSize: body.size }))
    }
 
-   const changePerPageHandler = (option: IOptionItem) => {
+   const changePerPageHandler = (
+      option: OnChangeValue<IOptionItem, boolean>
+   ) => {
+      option = option as IOptionItem
       dispatch(
          fetchingTeamsAction({
             page: body.page,

@@ -1,11 +1,18 @@
-import { CSSObjectWithLabel, ControlProps, StylesConfig } from 'react-select'
+import {
+   CSSObjectWithLabel,
+   ControlProps,
+   GroupBase,
+   StylesConfig,
+} from 'react-select'
+import { IOptionItem } from './AppSelect'
 
-export interface StylesSelectProps {
+export const StylesSelect = (props: {
    $form?: boolean
-}
-
-export const StylesSelect = (props: StylesSelectProps): StylesConfig => ({
-   control: (baseStyles: CSSObjectWithLabel, state: ControlProps) => ({
+}): StylesConfig<IOptionItem, boolean, GroupBase<IOptionItem>> => ({
+   control: (
+      baseStyles: CSSObjectWithLabel,
+      state: ControlProps<IOptionItem, boolean, GroupBase<IOptionItem>>
+   ) => ({
       ...baseStyles,
       minHeight: '40px',
 
@@ -44,13 +51,8 @@ export const StylesSelect = (props: StylesSelectProps): StylesConfig => ({
    valueContainer: (baseStyles: CSSObjectWithLabel) => ({
       ...baseStyles,
       flexWrap: 'nowrap',
-   }),
-   input: (baseStyles: CSSObjectWithLabel) => ({
-      ...baseStyles,
-
-      ':after': {
-         content: "'...'",
-      },
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
    }),
    option: (baseStyles: CSSObjectWithLabel, state) => ({
       ...baseStyles,

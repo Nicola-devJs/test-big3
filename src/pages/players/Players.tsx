@@ -20,6 +20,8 @@ import { playerSlice } from '../../modules/players/playerSlice'
 import { promiseOptionsTeamsName } from '../../common/helpers/promiseLoadOptions'
 import { useDebounce } from '../../common/hooks/debounce'
 import { ViewContent } from '../../components/viewContent/ViewContent'
+import { AppSelectValueContainer } from './components/selectComponents/ValueContainer'
+import { ActionMeta, OnChangeValue } from 'react-select'
 
 export const Players = () => {
    const { playersSearchQuery, sortedPlayersByTeams } = playerSlice.actions
@@ -48,7 +50,10 @@ export const Players = () => {
       dispatch(fetchingPlayersAction({ page: pageNumber, pageSize: body.size }))
    }
 
-   const changePerPageHandler = (option: IOptionItem) => {
+   const changePerPageHandler = (
+      option: OnChangeValue<IOptionItem, boolean>
+   ) => {
+      option = option as IOptionItem
       dispatch(
          fetchingPlayersAction({
             page: body.page,
@@ -57,11 +62,15 @@ export const Players = () => {
       )
    }
 
-   const filterPlayersByTeams = (options: IOptionItem[]) => {
-      const valueIdTeams = options.map(
-         (option) => option.value
-      ) as Array<number>
-      dispatch(sortedPlayersByTeams(valueIdTeams))
+   const filterPlayersByTeams = (
+      options: OnChangeValue<IOptionItem, boolean>
+   ) => {
+      if (Array.isArray(options)) {
+         const valueIdTeams = options.map(
+            (option) => option.value
+         ) as Array<number>
+         dispatch(sortedPlayersByTeams(valueIdTeams))
+      }
    }
 
    return (
@@ -80,6 +89,7 @@ export const Players = () => {
                   isCloseMenuOnSelect={false}
                   loadOptions={promiseOptionsTeamsName}
                   onChange={filterPlayersByTeams}
+                  components={{ ValueContainer: AppSelectValueContainer }}
                />
             </ToolbarWrapper>
             <Button $icon="+" onClick={() => navigate(RoutesNamePath.ADDITEM)}>
