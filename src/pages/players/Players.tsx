@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { OnChangeValue } from 'react-select'
 import { Main } from '../../components/styled/main/Main'
 import {
    MainPagination,
@@ -20,8 +21,6 @@ import { playerSlice } from '../../modules/players/playerSlice'
 import { promiseOptionsTeamsName } from '../../common/helpers/promiseLoadOptions'
 import { useDebounce } from '../../common/hooks/debounce'
 import { ViewContent } from '../../components/viewContent/ViewContent'
-import { AppSelectValueContainer } from './components/selectComponents/ValueContainer'
-import { ActionMeta, OnChangeValue } from 'react-select'
 
 export const Players = () => {
    const { playersSearchQuery, sortedPlayersByTeams } = playerSlice.actions
@@ -89,7 +88,6 @@ export const Players = () => {
                   isCloseMenuOnSelect={false}
                   loadOptions={promiseOptionsTeamsName}
                   onChange={filterPlayersByTeams}
-                  components={{ ValueContainer: AppSelectValueContainer }}
                />
             </ToolbarWrapper>
             <Button $icon="+" onClick={() => navigate(RoutesNamePath.ADDITEM)}>
