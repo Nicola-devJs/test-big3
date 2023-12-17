@@ -56,6 +56,7 @@ export const MainPagination = styled(StyledFlex)(
    height: 40px;
    margin-top: 32px;
    justify-content: space-between;
+   align-items: center;
 `
 )
 

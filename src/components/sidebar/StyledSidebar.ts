@@ -14,7 +14,7 @@ export const StyledSidebar = styled.aside<StyledSidebarProps>(
 
       @media(${props.theme.media.maxTablet}) {
          position: absolute;
-         z-index: 10;
+         z-index: 100;
          top: 0;
          bottom: 0;
          left: 0;

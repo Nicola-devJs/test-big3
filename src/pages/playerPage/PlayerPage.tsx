@@ -12,12 +12,14 @@ import {
    deletePlayerAction,
    getPlayerAction,
 } from '../../modules/players/playerThunk'
-import { Loading } from '../../components/loading/Loading'
-import { getAge } from '../../common/helpers/getAge'
+import { getAge } from '../../common/helpers/formatDate'
 import { RoutesNamePath } from '../Routes'
+import { ViewContent } from '../../components/viewContent/ViewContent'
 
 export const PlayerPage: React.FC = () => {
-   const { loading, currentPlayer } = useAppSelector((state) => state.player)
+   const { loading, currentPlayer, error } = useAppSelector(
+      (state) => state.player
+   )
    const dispatch = useAppDispatch()
    const location = useLocation()
    const navigate = useNavigate()
@@ -69,16 +71,14 @@ export const PlayerPage: React.FC = () => {
                />
             </ItemInfoTools>
          </Breadcrumbs>
-         {loading ? (
-            <Loading />
-         ) : (
+         <ViewContent error={error} loading={loading}>
             <ItemInfo
                urlImg={currentPlayer.avatarUrl}
                title={currentPlayer.name}
                titleSelected={currentPlayer.number}
                options={options}
             />
-         )}
+         </ViewContent>
       </Main>
    )
 }

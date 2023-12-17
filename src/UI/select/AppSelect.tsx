@@ -9,6 +9,7 @@ import {
 import { StylesSelect } from './AppSelectStyles'
 import { InputLabel } from '../inputLabel/InputLabel'
 import { SelectComponents } from 'react-select/dist/declarations/src/components'
+import { AppSelectWrapper } from './components/StyledMultiValueContainer'
 
 export interface IOptionItem {
    value: string | number
@@ -36,6 +37,8 @@ interface AppSelectProps
    label?: string
    width: string
    $form?: boolean
+   $isTabletSelectPage?: boolean
+   $isCenterText?: boolean
    errorLabel?: string
    loadOptions?: loadOptionsType
    onChange?: (
@@ -56,16 +59,22 @@ export const AppSelect = React.forwardRef<RefNode, AppSelectProps>(
          isClearable = false,
          selectedValue,
          $form,
+         $isTabletSelectPage,
+         $isCenterText,
          label,
          errorLabel,
          ...props
       },
       ref
    ) => {
-      const stylesAppSelect = StylesSelect({ $form })
+      const stylesAppSelect = StylesSelect({
+         $form,
+         $isTabletSelectPage,
+         $isCenterText,
+      })
 
       return (
-         <div style={{ flex: `0 1 ${width}`, maxWidth: width }}>
+         <AppSelectWrapper width={width}>
             <InputLabel label={label} errorLabel={errorLabel}>
                <AsyncSelect
                   ref={ref}
@@ -81,7 +90,7 @@ export const AppSelect = React.forwardRef<RefNode, AppSelectProps>(
                   cacheOptions
                />
             </InputLabel>
-         </div>
+         </AppSelectWrapper>
       )
    }
 )

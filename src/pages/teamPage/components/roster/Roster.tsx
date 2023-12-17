@@ -9,8 +9,8 @@ import {
 
 import { useAppDispatch, useAppSelector } from '../../../../core/redux/hooks'
 import { fetchingPlayersAction } from '../../../../modules/players/playerThunk'
-import { Loading } from '../../../../components/loading/Loading'
-import { getAge } from '../../../../common/helpers/getAge'
+import { getAge } from '../../../../common/helpers/formatDate'
+import { ViewContent } from '../../../../components/viewContent/ViewContent'
 
 interface RosterProps {
    teamId: number
@@ -18,7 +18,7 @@ interface RosterProps {
 
 export const Roster: React.FC<RosterProps> = ({ teamId }) => {
    const dispatch = useAppDispatch()
-   const { loading, body } = useAppSelector((state) => state.player)
+   const { loading, body, error } = useAppSelector((state) => state.player)
 
    useEffect(() => {
       dispatch(fetchingPlayersAction({ teamId }))
@@ -26,9 +26,7 @@ export const Roster: React.FC<RosterProps> = ({ teamId }) => {
 
    return (
       <>
-         {loading ? (
-            <Loading />
-         ) : (
+         <ViewContent loading={loading} error={error}>
             <StyledRoster>
                <RosterHead>
                   <RosterRow>
@@ -62,7 +60,7 @@ export const Roster: React.FC<RosterProps> = ({ teamId }) => {
                   ))}
                </RosterBody>
             </StyledRoster>
-         )}
+         </ViewContent>
       </>
    )
 }

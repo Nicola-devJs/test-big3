@@ -8,13 +8,15 @@ import { IOptionItem } from './AppSelect'
 
 export const StylesSelect = (props: {
    $form?: boolean
+   $isTabletSelectPage?: boolean
+   $isCenterText?: boolean
 }): StylesConfig<IOptionItem, boolean, GroupBase<IOptionItem>> => ({
    control: (
       baseStyles: CSSObjectWithLabel,
       state: ControlProps<IOptionItem, boolean, GroupBase<IOptionItem>>
    ) => ({
       ...baseStyles,
-      minHeight: '40px',
+      minHeight: props.$isTabletSelectPage ? '28px' : '40px',
 
       borderColor: props.$form ? 'transparent' : '#D1D1D1',
       boxShadow: state.isFocused ? 'none' : '',
@@ -41,7 +43,9 @@ export const StylesSelect = (props: {
    dropdownIndicator: (baseStyles: CSSObjectWithLabel) => ({
       ...baseStyles,
       color: '#D1D1D1',
+      padding: props.$isTabletSelectPage ? '4px' : '8px',
    }),
+
    multiValueLabel: (baseStyles: CSSObjectWithLabel) => ({
       ...baseStyles,
       color: '#fff',
@@ -53,6 +57,17 @@ export const StylesSelect = (props: {
       flexWrap: 'nowrap',
       whiteSpace: 'nowrap',
       overflow: 'hidden',
+      width: 0,
+      padding: props.$isTabletSelectPage ? '2px' : '2px 8px',
+      fontSize: 15,
+   }),
+   singleValue: (baseStyles: CSSObjectWithLabel) => ({
+      ...baseStyles,
+      textAlign: props.$isCenterText ? 'center' : 'start',
+   }),
+   menu: (baseStyles: CSSObjectWithLabel) => ({
+      ...baseStyles,
+      zIndex: 5,
    }),
    option: (baseStyles: CSSObjectWithLabel, state) => ({
       ...baseStyles,
@@ -63,6 +78,7 @@ export const StylesSelect = (props: {
          : 'transparent',
       color: state.isFocused ? '#fff' : state.isSelected ? '#fff' : '#9C9C9C',
       fontSize: '14px',
+      padding: props.$isTabletSelectPage ? '6px 14px' : '8px 20px',
       ':not(:last-child)': {
          borderBottom: '1px solid #D1D1D1',
       },

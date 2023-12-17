@@ -13,13 +13,13 @@ import {
    deleteTeamAction,
    fetchGetTeamAction,
 } from '../../modules/teams/teamThunk'
-import { Loading } from '../../components/loading/Loading'
 import { RoutesNamePath } from '../Routes'
+import { ViewContent } from '../../components/viewContent/ViewContent'
 
 export const TeamPage: React.FC = () => {
    const navigate = useNavigate()
    const dispatch = useAppDispatch()
-   const { currentTeam, loading } = useAppSelector((state) => state.team)
+   const { currentTeam, loading, error } = useAppSelector((state) => state.team)
 
    const location = useLocation()
    const idTeam = location.state as number
@@ -65,15 +65,14 @@ export const TeamPage: React.FC = () => {
                />
             </ItemInfoTools>
          </Breadcrumbs>
-         {loading ? (
-            <Loading />
-         ) : (
+
+         <ViewContent loading={loading} error={error}>
             <ItemInfo
                urlImg={currentTeam.imageUrl}
                title={currentTeam.name}
                options={optionsCurrentTeam}
             />
-         )}
+         </ViewContent>
 
          <Roster teamId={idTeam} />
       </Main>

@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { OnChangeValue } from 'react-select'
+import { useMediaQuery } from 'react-responsive'
 import { Main } from '../../components/styled/main/Main'
 import {
    MainPagination,
@@ -21,6 +22,7 @@ import { playerSlice } from '../../modules/players/playerSlice'
 import { promiseOptionsTeamsName } from '../../common/helpers/promiseLoadOptions'
 import { useDebounce } from '../../common/hooks/debounce'
 import { ViewContent } from '../../components/viewContent/ViewContent'
+import { AppSelectValueContainer } from '../../UI/select/components/MultiValueContainer'
 
 export const Players = () => {
    const { playersSearchQuery, sortedPlayersByTeams } = playerSlice.actions
@@ -31,6 +33,7 @@ export const Players = () => {
    const navigate = useNavigate()
    const [valueSearch, setValueSearch] = useState<string>('')
    const debounceCallback = useDebounce(callbackSearchQuery, 500)
+   const isTabletMedia = useMediaQuery({ query: '(max-width: 768px)' })
 
    useEffect(() => {
       dispatch(fetchingPlayersAction({ page: body.page, pageSize: body.size }))
@@ -88,6 +91,7 @@ export const Players = () => {
                   isCloseMenuOnSelect={false}
                   loadOptions={promiseOptionsTeamsName}
                   onChange={filterPlayersByTeams}
+                  components={{ ValueContainer: AppSelectValueContainer }}
                />
             </ToolbarWrapper>
             <Button $icon="+" onClick={() => navigate(RoutesNamePath.ADDITEM)}>
@@ -102,15 +106,17 @@ export const Players = () => {
          <MainPagination>
             <AppPagination
                itemsPerPage={body.size}
-               items={body.data}
+               countItems={body.count}
                onChange={changePageHandler}
             />
             <AppSelect
-               width="88px"
+               width={isTabletMedia ? '60px' : '88px'}
                name="items-per-page-select"
                options={OPTIONS_NUMBER_PAGES}
                selectedValue={OPTIONS_NUMBER_PAGES[0]}
                onChange={changePerPageHandler}
+               $isTabletSelectPage={isTabletMedia}
+               $isCenterText
             />
          </MainPagination>
       </Main>

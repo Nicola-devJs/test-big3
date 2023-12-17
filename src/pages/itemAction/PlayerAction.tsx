@@ -25,6 +25,7 @@ import { IGetPlayer } from '../../api/dto/IPlayers'
 import { gatDataFormPlayer } from './helpers/playerDataSubmit'
 import { getLimiterDate } from './helpers/getLimiterDate'
 import { FormError } from './components/error/FormError'
+import { initialDate } from '../../common/helpers/formatDate'
 
 export const PlayerAction = () => {
    const dispatch = useAppDispatch()
@@ -41,7 +42,7 @@ export const PlayerAction = () => {
       return {
          position: { value: position, label: position },
          team: { value: team, label: teamName },
-         birthday: new Date(birthday).toISOString().slice(0, 10),
+         birthday: initialDate(birthday),
          ...data,
       } as IUpdateItemPlayer
    }
@@ -59,6 +60,7 @@ export const PlayerAction = () => {
 
    function submitEditPlayerHandler(data: IAddItemPlayer) {
       const resData = gatDataFormPlayer(data)
+
       const id = defaultValuesByUpdatePlayers?.id as number
       const newData = { ...resData, id }
 

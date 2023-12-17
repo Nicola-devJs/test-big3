@@ -1,5 +1,7 @@
-import React, { ChangeEvent, useEffect, useState, useRef } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMediaQuery } from 'react-responsive'
+import { OnChangeValue } from 'react-select'
 import { Main } from '../../components/styled/main/Main'
 import {
    MainPagination,
@@ -18,7 +20,6 @@ import { teamSlice } from '../../modules/teams/teamSlice'
 import { OPTIONS_NUMBER_PAGES } from '../../common/constants/numberPages'
 import { useDebounce } from '../../common/hooks/debounce'
 import { ViewContent } from '../../components/viewContent/ViewContent'
-import { OnChangeValue } from 'react-select'
 
 export const Teams = () => {
    const { teamsSearchQuery } = teamSlice.actions
@@ -30,6 +31,7 @@ export const Teams = () => {
 
    const [valueSearch, setValueSearch] = useState<string>('')
    const debounceCallback = useDebounce(callbackSearchQuery, 500)
+   const isTabletMedia = useMediaQuery({ query: '(max-width: 768px)' })
 
    useEffect(() => {
       dispatch(fetchingTeamsAction({ page: body.page, pageSize: body.size }))
@@ -80,15 +82,17 @@ export const Teams = () => {
          <MainPagination>
             <AppPagination
                itemsPerPage={body.size}
-               items={body.data}
+               countItems={body.count}
                onChange={changePageHandler}
             />
             <AppSelect
-               width="88px"
+               width={isTabletMedia ? '60px' : '88px'}
                name="items-per-page-select"
                options={OPTIONS_NUMBER_PAGES}
                selectedValue={OPTIONS_NUMBER_PAGES[0]}
                onChange={changePerPageHandler}
+               $isTabletSelectPage={isTabletMedia}
+               $isCenterText
             />
          </MainPagination>
       </Main>

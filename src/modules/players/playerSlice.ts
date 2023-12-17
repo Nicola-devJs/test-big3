@@ -35,7 +35,7 @@ export const playerSlice = createSlice({
    reducers: {
       playersSearchQuery: (state, action: PayloadAction<string>) => {
          if (action.payload) {
-            state.sortedPlayers = state.sortedPlayers.filter((player) =>
+            state.sortedPlayers = state.body.data.filter((player) =>
                player.name.toLowerCase().includes(action.payload.toLowerCase())
             )
          } else {
@@ -95,12 +95,20 @@ export const playerSlice = createSlice({
             state.loading = false
             state.currentPlayer = action.payload
          })
+         .addCase(getPlayerAction.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
+         })
          .addCase(deletePlayerAction.pending, (state) => {
             state.loading = true
          })
          .addCase(deletePlayerAction.fulfilled, (state, action) => {
             state.loading = false
             state.body.data.filter((player) => player.id !== action.payload.id)
+         })
+         .addCase(deletePlayerAction.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
          })
    },
 })

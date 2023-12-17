@@ -61,6 +61,10 @@ export const teamSlice = createSlice({
             state.loading = false
             state.currentTeam = action.payload
          })
+         .addCase(fetchGetTeamAction.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
+         })
          .addCase(addTeamAction.pending, (state) => {
             state.loading = true
          })
@@ -88,6 +92,10 @@ export const teamSlice = createSlice({
          .addCase(deleteTeamAction.fulfilled, (state, action) => {
             state.loading = false
             state.body.data.filter((team) => team.id !== action.payload.id)
+         })
+         .addCase(deleteTeamAction.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.payload
          })
    },
 })

@@ -8,14 +8,14 @@ import notfound from '../../assets/images/404.png'
 interface ViewContentProps {
    loading: boolean
    error: IFetchingRejected | undefined
-   list: Array<object>
+   list?: Array<object>
    children: React.ReactNode
 }
 
 export const ViewContent = ({
    loading,
    error,
-   list = [],
+   list,
    children,
 }: ViewContentProps) => {
    return (
@@ -29,6 +29,8 @@ export const ViewContent = ({
                title={error.statusText}
                text="Sorry, we can’t find what you’re looking for"
             />
+         ) : !list ? (
+            <>{children}</>
          ) : list.length ? (
             <>{children}</>
          ) : (

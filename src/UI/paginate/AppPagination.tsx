@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive'
 
 interface AppPaginationProps {
    itemsPerPage: number
-   items: Array<any>
+   countItems: number
    onChange: (page: number) => void
 }
 
@@ -13,11 +13,11 @@ type selectedItem = { selected: number }
 
 export const AppPagination: React.FC<AppPaginationProps> = ({
    itemsPerPage,
-   items,
+   countItems,
    onChange,
 }) => {
    const isTablet = useMediaQuery({ query: '(max-width: 768px)' })
-   const pageCount = Math.ceil(items.length / itemsPerPage)
+   const pageCount = Math.ceil(countItems / itemsPerPage)
 
    const handlePageClick = (event: selectedItem) => {
       onChange(event.selected + 1)

@@ -5,7 +5,8 @@ export const CardsWrapper = styled(StyledFlex)(
    (props) => `
    min-width: 100%;
    margin: -12px;
-
+   
+   flex-wrap: wrap;
 `
 )
 
@@ -19,7 +20,7 @@ export const CardItem = styled.div(
       flex: 0 1 25%;
    }
 
-   @media(${props.theme.media.maxNotebook}) {
+   @media(max-width: 1200px) {
       flex: 0 1 50%;
    }
 
@@ -54,13 +55,17 @@ export const CardImg = styled(StyledFlex)<{ $whatPage: string }>(
    @media(${props.theme.media.maxTablet}) {
       padding: ${
          props.$whatPage === 'teams' ? '32px 56px 25px' : '11px 24px 0px'
-      } ;
+      };
       img {
          width: 100%;
          height: 100%;
 
          object-fit: contain;
       }
+   }
+
+   @media(${props.theme.media.maxPhone}) {
+      padding: ${props.$whatPage === 'teams' ? '11px 24px' : '11px 24px 0px'};
    }
 `
 )
