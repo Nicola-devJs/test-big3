@@ -5,7 +5,7 @@ import {
    capitalizeWorld,
    getNameRootPage,
    singularWorld,
-} from '../../common/helpers/stringHelper'
+} from '../../helpers/stringHelper'
 
 interface BreadcrumbsProps extends StyledBreadcrumbsProps {
    prefixParam?: string

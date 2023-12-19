@@ -1,7 +1,7 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs'
-import { Main } from '../../components/styled/main/Main'
+import { Breadcrumbs } from '../../common/components/breadcrumbs/Breadcrumbs'
+import { Main } from '../../common/components/styled/main/Main'
 import {
    FormAddWrapperFields,
    FormAddContainerFields,

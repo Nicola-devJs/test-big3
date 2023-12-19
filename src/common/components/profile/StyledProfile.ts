@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { StyledFlex } from '../styled/flex/StyledFlex'
-import defaultAvatar from '../../assets/images/profile.png'
+import defaultAvatar from '../../../assets/images/profile.png'
 
 export interface StyledProfileAvatarProps {
    $avatar: string | null

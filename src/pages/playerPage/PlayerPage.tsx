@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { ItemInfo, optionsType } from '../../components/itemInfo/ItemInfo'
-import { Main } from '../../components/styled/main/Main'
-import { Breadcrumbs } from '../../components/breadcrumbs/Breadcrumbs'
+import {
+   ItemInfo,
+   optionsType,
+} from '../../common/components/itemInfo/ItemInfo'
+import { Main } from '../../common/components/styled/main/Main'
+import { Breadcrumbs } from '../../common/components/breadcrumbs/Breadcrumbs'
 import {
    ItemInfoTools,
    ItemInfoToolsItem,
-} from '../../components/itemInfo/StyledItemInfo'
+} from '../../common/components/itemInfo/StyledItemInfo'
 import { useAppDispatch, useAppSelector } from '../../core/redux/hooks'
 import {
    deletePlayerAction,
@@ -14,7 +17,7 @@ import {
 } from '../../modules/players/playerThunk'
 import { getAge } from '../../common/helpers/formatDate'
 import { RoutesNamePath } from '../Routes'
-import { ViewContent } from '../../components/viewContent/ViewContent'
+import { ViewContent } from '../../common/components/viewContent/ViewContent'
 
 export const PlayerPage: React.FC = () => {
    const { loading, currentPlayer, error } = useAppSelector(

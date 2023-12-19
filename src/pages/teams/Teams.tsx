@@ -2,12 +2,12 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 import { OnChangeValue } from 'react-select'
-import { Main } from '../../components/styled/main/Main'
+import { Main } from '../../common/components/styled/main/Main'
 import {
    MainPagination,
    MainToolbar,
    MainContent,
-} from '../../components/styled/main/StyledMain'
+} from '../../common/components/styled/main/StyledMain'
 import { Button } from '../../UI/button/Button'
 import { Search } from '../../UI/search/Search'
 import { AppPagination } from '../../UI/paginate/AppPagination'
@@ -19,7 +19,7 @@ import { TeamCards } from './components/cards/TeamCards'
 import { teamSlice } from '../../modules/teams/teamSlice'
 import { OPTIONS_NUMBER_PAGES } from '../../common/constants/numberPages'
 import { useDebounce } from '../../common/hooks/debounce'
-import { ViewContent } from '../../components/viewContent/ViewContent'
+import { ViewContent } from '../../common/components/viewContent/ViewContent'
 
 export const Teams = () => {
    const { teamsSearchQuery } = teamSlice.actions
@@ -83,13 +83,14 @@ export const Teams = () => {
             <AppPagination
                itemsPerPage={body.size}
                countItems={body.count}
+               currentPage={body.page}
                onChange={changePageHandler}
             />
             <AppSelect
                width={isTabletMedia ? '60px' : '88px'}
                name="items-per-page-select"
                options={OPTIONS_NUMBER_PAGES}
-               selectedValue={OPTIONS_NUMBER_PAGES[0]}
+               selectedValue={{ value: body.size, label: body.size.toString() }}
                onChange={changePerPageHandler}
                $isTabletSelectPage={isTabletMedia}
                $isCenterText

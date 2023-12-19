@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ReactPaginate from 'react-paginate'
 import classes from './AppPaginate.module.css'
 import { useMediaQuery } from 'react-responsive'
@@ -6,6 +6,7 @@ import { useMediaQuery } from 'react-responsive'
 interface AppPaginationProps {
    itemsPerPage: number
    countItems: number
+   currentPage: number
    onChange: (page: number) => void
 }
 
@@ -14,6 +15,7 @@ type selectedItem = { selected: number }
 export const AppPagination: React.FC<AppPaginationProps> = ({
    itemsPerPage,
    countItems,
+   currentPage,
    onChange,
 }) => {
    const isTablet = useMediaQuery({ query: '(max-width: 768px)' })
@@ -31,6 +33,7 @@ export const AppPagination: React.FC<AppPaginationProps> = ({
          pageRangeDisplayed={isTablet ? 3 : 4}
          marginPagesDisplayed={1}
          pageCount={pageCount}
+         forcePage={currentPage - 1}
          previousLabel="<"
          renderOnZeroPageCount={null}
          containerClassName={classes.paginate}

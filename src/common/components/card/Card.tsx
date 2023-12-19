@@ -1,7 +1,7 @@
 import React from 'react'
 import { CardItem, CardBody, CardImg, CardInfo } from './StyledCards'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { getNameRootPage } from '../../common/helpers/stringHelper'
+import { getNameRootPage } from '../../helpers/stringHelper'
 
 interface CardsProps {
    id: number

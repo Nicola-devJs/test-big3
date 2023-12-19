@@ -22,7 +22,7 @@ interface IPlayersState {
 }
 
 const initialState: IPlayersState = {
-   body: { count: 0, data: [], page: 1, size: 6 },
+   body: { count: 0, data: [], page: -1, size: 6 },
    currentPlayer: {} as IGetPlayer,
    sortedPlayers: [],
    loading: false,

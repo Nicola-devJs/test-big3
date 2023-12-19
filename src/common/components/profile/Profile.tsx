@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledProfile, ProfileName, ProfileAvatar } from './StyledProfile'
-import { useAppSelector } from '../../core/redux/hooks'
+import { useAppSelector } from '../../../core/redux/hooks'
 
 interface ProfileProps {
    fontSize?: number

@@ -1,9 +1,9 @@
 import React from 'react'
-import { IFetchingRejected } from '../../common/helpers/interfaces/requestInterfaces/RequestBase'
+import { IFetchingRejected } from '../../helpers/interfaces/requestInterfaces/RequestBase'
 import { Loading } from '../loading/Loading'
 import { Empty } from '../empty/Empty'
 import { ErrorContent } from '../errorContent/ErrorContent'
-import notfound from '../../assets/images/404.png'
+import notfound from '../../../assets/images/404.png'
 
 interface ViewContentProps {
    loading: boolean

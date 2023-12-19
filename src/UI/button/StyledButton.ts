@@ -1,5 +1,5 @@
 import { styled, keyframes, css } from 'styled-components'
-import { StyledFlex } from '../../components/styled/flex/StyledFlex'
+import { StyledFlex } from '../../common/components/styled/flex/StyledFlex'
 
 export interface StyledButtonProps {
    width?: string

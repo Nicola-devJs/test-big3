@@ -9,9 +9,9 @@ import {
    StyledSidebarProps,
    SidebarWrapperProfile,
 } from './StyledSidebar'
-import { RoutesNamePath } from '../../pages/Routes'
-import { useAppDispatch } from '../../core/redux/hooks'
-import { authSlice } from '../../modules/authorization/authorizationSlice'
+import { RoutesNamePath } from '../../../pages/Routes'
+import { useAppDispatch } from '../../../core/redux/hooks'
+import { authSlice } from '../../../modules/authorization/authorizationSlice'
 import { Profile } from '../profile/Profile'
 
 interface SidebarProps extends StyledSidebarProps {

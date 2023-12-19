@@ -1,7 +1,7 @@
 import React from 'react'
 import { ErrorContent } from '../errorContent/ErrorContent'
-import emptyTeams from '../../assets/images/emptyTeams.png'
-import emptyPlayers from '../../assets/images/emptyPlayers.png'
+import emptyTeams from '../../../assets/images/emptyTeams.png'
+import emptyPlayers from '../../../assets/images/emptyPlayers.png'
 import { useLocation } from 'react-router-dom'
 
 const emptyImages = {

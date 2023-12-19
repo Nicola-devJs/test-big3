@@ -1,5 +1,5 @@
 import { css, styled } from 'styled-components'
-import { StyledFlex } from '../../../../components/styled/flex/StyledFlex'
+import { StyledFlex } from '../../../../common/components/styled/flex/StyledFlex'
 import pictureSignIn from '../../../../assets/images/signin.png'
 import pictureSignUp from '../../../../assets/images/signup.png'
 

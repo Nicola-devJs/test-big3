@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledHeader, HeaderLogo, HeaderMobileMenu } from './StyledHeader'
-import logo from '../../assets/images/logo.png'
+import logo from '../../../assets/images/logo.png'
 import MediaQuery from 'react-responsive'
 import { Profile } from '../profile/Profile'
 

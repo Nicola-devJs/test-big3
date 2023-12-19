@@ -10,7 +10,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../../../core/redux/hooks'
 import { fetchingPlayersAction } from '../../../../modules/players/playerThunk'
 import { getAge } from '../../../../common/helpers/formatDate'
-import { ViewContent } from '../../../../components/viewContent/ViewContent'
+import { ViewContent } from '../../../../common/components/viewContent/ViewContent'
 
 interface RosterProps {
    teamId: number

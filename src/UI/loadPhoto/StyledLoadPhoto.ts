@@ -1,5 +1,5 @@
 import { styled } from 'styled-components'
-import { StyledFlex } from '../../components/styled/flex/StyledFlex'
+import { StyledFlex } from '../../common/components/styled/flex/StyledFlex'
 import loadPhotoIcon from '../../assets/images/load-photo.png'
 
 export const StyledLoadPhoto = styled(StyledFlex)<{ $urlPhoto: string }>(

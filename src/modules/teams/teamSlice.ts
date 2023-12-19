@@ -18,7 +18,7 @@ interface ITeamsState {
 }
 
 const initialState = {
-   body: { count: 0, data: [] as ITeamItem[], page: 1, size: 6 },
+   body: { count: 0, data: [] as ITeamItem[], page: -1, size: 6 },
    currentTeam: {} as ITeamItem,
    sortedTeam: [],
    loading: false,

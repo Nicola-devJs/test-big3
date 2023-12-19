@@ -1,7 +1,7 @@
 import React from 'react'
 import { IPlayerItem } from '../../../../api/dto/IPlayers'
-import { CardsWrapper } from '../../../../components/card/StyledCards'
-import { Card } from '../../../../components/card/Card'
+import { CardsWrapper } from '../../../../common/components/card/StyledCards'
+import { Card } from '../../../../common/components/card/Card'
 import { useAppSelector } from '../../../../core/redux/hooks'
 
 interface PlayerCardsProps {

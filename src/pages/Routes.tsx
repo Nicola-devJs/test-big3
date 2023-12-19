@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { Layout } from '../components/layout/Layout'
+import { Layout } from '../common/components/layout/Layout'
 import { Players } from './players/Players'
 import { Teams } from './teams/Teams'
 import { SignIn } from './authorization/SignIn'

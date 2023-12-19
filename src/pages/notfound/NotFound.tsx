@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyledNotFound } from './StyledNotFound'
 import notfound from '../../assets/images/404.png'
-import { ErrorContent } from '../../components/errorContent/ErrorContent'
+import { ErrorContent } from '../../common/components/errorContent/ErrorContent'
 
 export const NotFound = () => {
    return (

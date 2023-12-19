@@ -1,7 +1,7 @@
 import React from 'react'
 import { ITeamItem } from '../../../../api/dto/ITeams'
-import { CardsWrapper } from '../../../../components/card/StyledCards'
-import { Card } from '../../../../components/card/Card'
+import { CardsWrapper } from '../../../../common/components/card/StyledCards'
+import { Card } from '../../../../common/components/card/Card'
 
 interface TeamCardsProps {
    list: ITeamItem[]

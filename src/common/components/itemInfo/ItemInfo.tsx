@@ -8,7 +8,7 @@ import {
    ItemInfoList,
    ItemInfoListItem,
 } from './StyledItemInfo'
-import { getNameRootPage } from '../../common/helpers/stringHelper'
+import { getNameRootPage } from '../../helpers/stringHelper'
 
 export type optionsType = Array<{ label: string; value: string | number }>
 
